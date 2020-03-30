@@ -37,34 +37,25 @@ public class ToolsFragment extends Fragment {
                 ViewModelProviders.of(this).get(ToolsViewModel.class);
       //  View root = inflater.inflate(R.layout.fragment_tools, container, false);
         final TextView textView = getView().findViewById(R.id.text_tools);
-        final TextView tvw=(TextView)getView().findViewById(R.id.textView1);
         final TimePicker picker = getView().findViewById(R.id.timePicker1);
         picker.setIs24HourView(true);
+//        picker.setHour(toolsViewM);
         Button ok = getView().findViewById(R.id.settingOK);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int hour, minute;
-                String am_pm;
                 if (Build.VERSION.SDK_INT >= 23 ){
                     hour = picker.getHour();
                     minute = picker.getMinute();
-                    toolsViewModel.deleteTime();
-                    toolsViewModel.insertTime(new Time(1, hour, minute));
+
                 }
                 else{
                     hour = picker.getCurrentHour();
                     minute = picker.getCurrentMinute();
                 }
-                if(hour > 12) {
-                    am_pm = "PM";
-                    hour = hour - 12;
-                }
-                else
-                {
-                    am_pm="AM";
-                }
-                //tvw.setText("Selected Date: "+ hour +":"+ minute+" "+am_pm);
+                toolsViewModel.deleteTime();
+                toolsViewModel.insertTime(new Time(1, hour, minute));
 
             }
 
@@ -72,7 +63,11 @@ public class ToolsFragment extends Fragment {
         toolsViewModel.getAlltimes().observe(this, new Observer<List<Time>>() {
             @Override
             public void onChanged(List<Time> times) {
-                textView.setText(times.get(0).toString());
+                if (times.size() >0){
+                picker.setHour(times.get(0).getHour());
+                picker.setMinute(times.get(0).getMinute());
+                //textView.setText(times.get(0).toString());
+                    }
             }
         });
         toolsViewModel.getText().observe(this, new Observer<String>() {
