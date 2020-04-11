@@ -1,5 +1,7 @@
 package com.example.sleepforest.ui.home;
 
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
 import com.example.sleepforest.R;
+import com.example.sleepforest.ScreenReceiver;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    private ScreenReceiver screenReceiver;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
@@ -26,8 +31,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
+
             }
         });
+        screenReceiver = new ScreenReceiver();
+        IntentFilter screenStatusIF = new IntentFilter();
+        screenStatusIF.addAction(Intent.ACTION_SCREEN_ON);
+        screenStatusIF.addAction(Intent.ACTION_SCREEN_OFF);
+        getActivity().registerReceiver(screenReceiver, screenStatusIF);
         return root;
     }
 }

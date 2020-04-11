@@ -1,10 +1,7 @@
 package com.example.sleepforest;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -19,12 +16,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
-import android.widget.TimePicker;
-import android.widget.Toast;
-
-import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
+
+   // private ScreenReceiver screenReceiver;
+
 
     private AppBarConfiguration mAppBarConfiguration;
     @Override
@@ -53,6 +49,15 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+//        screenReceiver = new ScreenReceiver();
+//        IntentFilter screenStatusIF = new IntentFilter();
+//        screenStatusIF.addAction(Intent.ACTION_SCREEN_ON);
+//        screenStatusIF.addAction(Intent.ACTION_SCREEN_OFF);
+//        registerReceiver(screenReceiver, screenStatusIF);
+
+
+
     }
 
     @Override
