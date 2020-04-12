@@ -3,6 +3,7 @@ package com.example.sleepforest.ui.home;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +11,21 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.sleepforest.R;
 import com.example.sleepforest.ScreenReceiver;
+import com.example.sleepforest.Time;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private ScreenReceiver screenReceiver;
+    private Time bedtime;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
@@ -39,6 +45,14 @@ public class HomeFragment extends Fragment {
         screenStatusIF.addAction(Intent.ACTION_SCREEN_ON);
         screenStatusIF.addAction(Intent.ACTION_SCREEN_OFF);
         getActivity().registerReceiver(screenReceiver, screenStatusIF);
+
+        if (this.bedtime != null){
+        Log.e(TAG,this.bedtime.toString());}
         return root;
     }
+
+    public void setBedtime(Time bedtime) {
+        this.bedtime = bedtime;
+    }
+
 }

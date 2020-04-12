@@ -1,11 +1,18 @@
 package com.example.sleepforest;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+
+import com.example.sleepforest.ui.home.HomeFragment;
+import com.example.sleepforest.ui.tools.ToolsFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import android.view.View;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -17,10 +24,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnRegisterSuccessListener {
 
    // private ScreenReceiver screenReceiver;
-
 
     private AppBarConfiguration mAppBarConfiguration;
     @Override
@@ -49,12 +55,16 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        repository = new TimeRepository(getApplication());
 
 //        screenReceiver = new ScreenReceiver();
 //        IntentFilter screenStatusIF = new IntentFilter();
 //        screenStatusIF.addAction(Intent.ACTION_SCREEN_ON);
 //        screenStatusIF.addAction(Intent.ACTION_SCREEN_OFF);
 //        registerReceiver(screenReceiver, screenStatusIF);
+
+//        ToolsFragment tools = (ToolsFragment) getSupportFragmentManager().findFragmentById(R.id.nav_tools);
+//        tools.setOnRegisterSuccessListener(this);
 
 
 
@@ -73,4 +83,44 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-}
+
+//    @Override
+//    public void onAttachFragment(Fragment fragment) {
+//        if(fragment instanceof ToolsFragment){
+//           ToolsFragment toolsFragment= (ToolsFragment) fragment;
+//           toolsFragment.setOnRegisterSuccessListener(this);
+//
+//
+//        }
+//
+//    }
+    @Override
+    public void onRegisterSuccess(Time time) {
+        HomeFragment home = (HomeFragment) getSupportFragmentManager().findFragmentById(R.id.nav_home);
+        if (home != null){
+        home.setBedtime(time);
+    }
+       else{
+           HomeFragment newHome = new HomeFragment();
+           newHome.setBedtime(time);
+
+           FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+           // Replace whatever is in the fragment_container view with this fragment,
+           // and add the transaction to the back stack so the user can navigate back
+           transaction
+                   .setCustomAnimations(R.anim.nav_default_enter_anim,
+                           R.anim.nav_default_exit_anim)
+                   .replace(R.id.nav_host_fragment, newHome)
+                   .hide(newHome);
+           transaction.addToBackStack(null);
+
+           // Commit the transaction
+           transaction.commit();
+
+        }
+
+       }
+
+
+    }

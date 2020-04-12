@@ -1,5 +1,6 @@
 package com.example.sleepforest.ui.tools;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -23,6 +24,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.sleepforest.AlarmReceiverActivity;
+import com.example.sleepforest.OnRegisterSuccessListener;
 import com.example.sleepforest.R;
 import com.example.sleepforest.Time;
 
@@ -32,6 +34,7 @@ import java.util.List;
 public class ToolsFragment extends Fragment {
 
     private ToolsViewModel toolsViewModel;
+    private OnRegisterSuccessListener onRegisterSuccessListener;
 
     public static ToolsFragment newInstance(){
         return new ToolsFragment();
@@ -63,8 +66,8 @@ public class ToolsFragment extends Fragment {
 
         }
         else{
-            hour = picker.getCurrentHour();
-            minute = picker.getCurrentMinute();
+            hour = 23;
+            minute = 0;
         }
 //        if (setHour != 0&& setMin != 0){
             Calendar cal = Calendar.getInstance();
@@ -80,6 +83,7 @@ public class ToolsFragment extends Fragment {
                     cal.getTimeInMillis(), 1000 * 60 * 60 * 24, pendint);
 
             Toast.makeText(getActivity(), "Alarm Set", Toast.LENGTH_SHORT).show();
+            onRegisterSuccessListener.onRegisterSuccess(new Time(1, hour, minute));
 
         //}
         Button ok = getView().findViewById(R.id.settingOK);
@@ -94,8 +98,8 @@ public class ToolsFragment extends Fragment {
 
                 }
                 else{
-                    hour = picker.getCurrentHour();
-                    minute = picker.getCurrentMinute();
+                    hour = 23;
+                    minute = 0;
                 }
                 toolsViewModel.deleteTime();
                 toolsViewModel.insertTime(new Time(1, hour, minute));
@@ -113,6 +117,7 @@ public class ToolsFragment extends Fragment {
                         cal.getTimeInMillis(), 1000 * 60 * 60 * 24, pendint);
 
                 Toast.makeText(getActivity(), "Alarm Set", Toast.LENGTH_SHORT).show();
+                onRegisterSuccessListener.onRegisterSuccess(new Time(1, hour, minute));
             }
 
         });
@@ -133,5 +138,25 @@ public class ToolsFragment extends Fragment {
             }
         });
         //return root;
+    }
+
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onAttach(Activity activity) {
+
+
+        super.onAttach(activity);
+        onRegisterSuccessListener = (OnRegisterSuccessListener) activity;
+        //onRegisterSuccessListener.onRegisterSuccess(new Time(1, 23, 0));
+
+    }
+
+    public void setOnRegisterSuccessListener(OnRegisterSuccessListener onRegisterSuccessListener) {
+        this.onRegisterSuccessListener = onRegisterSuccessListener;
     }
 }
