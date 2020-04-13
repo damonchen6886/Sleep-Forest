@@ -50,6 +50,8 @@ public class ToolsFragment extends Fragment {
         final TextView textView = getView().findViewById(R.id.text_tools);
         final TimePicker picker = getView().findViewById(R.id.timePicker1);
         picker.setIs24HourView(true);
+        picker.setHour(23);
+        picker.setMinute(0);
 //        picker.setHour(toolsViewM);
 
         final AlarmManager alarmManager = (AlarmManager) getActivity()
@@ -81,7 +83,7 @@ public class ToolsFragment extends Fragment {
                     cal.getTimeInMillis(), 1000 * 60 * 60 * 24, pendint);
 
             Toast.makeText(getActivity(), "Alarm Set", Toast.LENGTH_SHORT).show();
-            onRegisterSuccessListener.onRegisterSuccess(new Time(1, hour, minute));
+            onRegisterSuccessListener.onRegisterSuccess(cal);
 
         //}
         Button ok = getView().findViewById(R.id.settingOK);
@@ -115,7 +117,7 @@ public class ToolsFragment extends Fragment {
                         cal.getTimeInMillis(), 1000 * 60 * 60 * 24, pendint);
 
                 Toast.makeText(getActivity(), "Alarm Set", Toast.LENGTH_SHORT).show();
-                onRegisterSuccessListener.onRegisterSuccess(new Time(1, hour, minute));
+                onRegisterSuccessListener.onRegisterSuccess(cal);
             }
 
         });
