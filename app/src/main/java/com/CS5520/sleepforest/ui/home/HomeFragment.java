@@ -4,6 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.hardware.Sensor;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.CS5520.sleepforest.MovementListener;
 import com.CS5520.sleepforest.R;
 import com.CS5520.sleepforest.ScreenReceiver;
 import com.CS5520.sleepforest.Time;
@@ -49,6 +53,8 @@ public class HomeFragment extends Fragment {
     private Date bedtime;
     private boolean fail=false;
     private boolean growing = true;
+    private SensorManager sensorManager;
+    private MovementListener sensorEventListener;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +74,17 @@ public class HomeFragment extends Fragment {
         //screenStatusIF.addAction(Intent.ACTION_SCREEN_ON);
         screenStatusIF.addAction(Intent.ACTION_SCREEN_OFF);
         getActivity().registerReceiver(screenOffReceiver, screenStatusIF);
+
+        sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        if (sensor != null) {
+            Log.e(TAG, "GRAVITY supports");
+        } else {
+            Log.e(TAG, "no GRAVITY supports");
+        }
+
+        sensorEventListener = new MovementListener();
+        sensorManager.registerListener(sensorEventListener,sensor,SensorManager.SENSOR_DELAY_NORMAL);
 
         if (this.bedtime != null){
         Log.e(TAG,this.bedtime.toString());}
