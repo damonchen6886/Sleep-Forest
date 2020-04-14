@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements OnRegisterSuccess
         HomeFragment home = (HomeFragment) getSupportFragmentManager().findFragmentById(R.id.nav_home);
         if (home != null){
         home.setBedtime(time);
-    }
+        }
        else{
            HomeFragment newHome = new HomeFragment();
            newHome.setBedtime(time);

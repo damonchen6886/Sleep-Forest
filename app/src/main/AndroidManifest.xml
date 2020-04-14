@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.CS5520.sleepforest" >
+    package="com.CS5520.sleepforest">
 
     <application
         android:allowBackup="true"
@@ -9,19 +9,19 @@
         android:roundIcon="@mipmap/ic_sleepforest"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.CS5520.sleepforest.WhiteNoisePlayer"></activity>
+        <activity android:name=".WhiteNoisePlayer" />
 
         <receiver
-            android:name="com.CS5520.sleepforest.AlarmReceiverActivity"
+            android:name=".AlarmReceiverActivity"
             android:enabled="true"
             android:exported="true" />
         <receiver
-            android:name="com.CS5520.sleepforest.ScreenReceiver"
+            android:name=".ScreenReceiver"
             android:enabled="true"
             android:exported="true" />
 
         <activity
-            android:name="com.CS5520.sleepforest.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

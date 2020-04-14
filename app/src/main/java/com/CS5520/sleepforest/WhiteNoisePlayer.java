@@ -29,7 +29,8 @@ public class WhiteNoisePlayer extends AppCompatActivity {
         remainingTimeLabel = (TextView)findViewById(R.id.remainingTimeLabel);
 
         // media player
-        play();
+        int extra = getIntent().getIntExtra("soundFile", 0);
+        play(extra);
 
         positionBar = (SeekBar)findViewById(R.id.positionBar);
         positionBar.setMax(totalTime );
@@ -38,8 +39,9 @@ public class WhiteNoisePlayer extends AppCompatActivity {
 
     }
 
-    private void play() {
-        mp = MediaPlayer.create(this, R.raw.pn01);
+    private void play(int extra) {
+        //R.raw.pn01
+        mp = MediaPlayer.create(this, extra);
         mp.setLooping(true);
         mp.seekTo(0);
         mp.setVolume(0.5f, 0.5f);
