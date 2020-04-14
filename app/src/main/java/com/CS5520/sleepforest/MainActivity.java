@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity implements OnRegisterSuccessListener {
 
    // private ScreenReceiver screenReceiver;
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements OnRegisterSuccess
 //
 //    }
     @Override
-    public void onRegisterSuccess(Time time) {
+    public void onRegisterSuccess(Calendar time) {
         HomeFragment home = (HomeFragment) getSupportFragmentManager().findFragmentById(R.id.nav_home);
         if (home != null){
         home.setBedtime(time);

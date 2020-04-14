@@ -12,13 +12,13 @@ public interface ShopDao {
     @Insert
     void insertShop(Shop shop);
 
-    @Query("SELECT * FROM time where timeId = :totalCoins")
-    List<Shop> findCurrentCoins(int totalCoins);
-
-    @Update
-    void subtractCoins();
-
-    @Update
-    void addCoins();
+//    @Query("SELECT :totalCoins FROM shop where shopId = 0")
+//    List<Shop> findCurrentCoins(int totalCoins);
+//
+//    @Query("UPDATE SHOP SET totalCoins  = (select totalCoins from  shop where shopId = 0) - :numbers WHERE shopId = 0")
+//    void subtractCoins(int numbers);
+//
+//    @Query("UPDATE SHOP SET totalCoins  = :coins WHERE shopId = 0")
+//    int addCoins(int coins);
 
 }

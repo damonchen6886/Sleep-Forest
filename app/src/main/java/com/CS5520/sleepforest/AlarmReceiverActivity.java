@@ -22,7 +22,7 @@ public class AlarmReceiverActivity extends BroadcastReceiver {
 
 
         notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        createNotificationChannel("com.example.sleepforest.bedtime", "Sleep Forest",
+        createNotificationChannel("com.CS5520.sleepforest.bedtime", "Sleep Forest",
                 "Time to go to bed.");
 
         Toast.makeText(context, Calendar.getInstance().getTime().toString() , Toast.LENGTH_LONG).show();
@@ -53,7 +53,7 @@ public class AlarmReceiverActivity extends BroadcastReceiver {
 
     protected void sendNotification(Context context) {
         int notificationID = 101;
-        String channelID = "com.example.sleepforest.bedtime";
+        String channelID = "com.CS5520.sleepforest.bedtime";
         Notification notification = new Notification.Builder(context, channelID)
                 .setContentTitle("Sleep Forest")
                 .setContentText("Time to go to bed.")
