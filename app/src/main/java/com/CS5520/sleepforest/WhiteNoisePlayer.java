@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+/**
+ * This is the page for users to adjust progress and volume when white noises are playing.
+ * Modified from https://codingwithsara.com/java-android-studio-tutorial-simple-music-player/
+ */
 public class WhiteNoisePlayer extends AppCompatActivity {
 
     Button playBtn;
