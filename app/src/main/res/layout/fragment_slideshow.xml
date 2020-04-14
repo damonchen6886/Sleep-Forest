@@ -10,7 +10,9 @@
     <ListView
         android:id="@+id/musicList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:divider="@color/grayLine"
+        android:dividerHeight="1dp">
     </ListView>
 
 </LinearLayout>

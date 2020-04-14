@@ -43,7 +43,7 @@
         android:id="@+id/playBtn"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/play"
+        android:background="@drawable/stop"
         android:onClick="playBtnClick"
         android:layout_marginTop="40dp"
         android:layout_gravity="center_horizontal"/>

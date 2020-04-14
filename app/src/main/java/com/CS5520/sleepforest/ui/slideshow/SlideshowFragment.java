@@ -23,8 +23,8 @@ public class SlideshowFragment extends Fragment {
     // private Context cont;
     private SlideshowViewModel slideshowViewModel;
     ListView musicList;
-    final String[] listContent = {"pure noise 01"};
-    final int[] ids = {R.raw.pn01};
+    final String[] listContent = {"pure noise 01", "pure noise 02"};
+    final int[] ids = {R.raw.pn01, R.raw.pn02};
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
