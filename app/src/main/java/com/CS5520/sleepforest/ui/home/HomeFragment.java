@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -53,6 +54,7 @@ public class HomeFragment extends Fragment {
     private Date bedtime;
     private boolean fail=false;
     private boolean growing = true;
+    private ImageView mainImage;
     private SensorManager sensorManager;
     private MovementListener sensorEventListener;
 
@@ -62,7 +64,8 @@ public class HomeFragment extends Fragment {
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
+        mainImage = root.findViewById(R.id.imageViewMain);
+        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
@@ -87,12 +90,19 @@ public class HomeFragment extends Fragment {
         sensorManager.registerListener(sensorEventListener,sensor,SensorManager.SENSOR_DELAY_NORMAL);
 
         if (this.bedtime != null){
-        Log.e(TAG,this.bedtime.toString());}
+            Log.e(TAG,this.bedtime.toString());
+        }else{
+            this.mainImage.setImageResource(R.drawable.main_page2);
+        }
         return root;
     }
 
     public void setBedtime(Calendar bedtime) {
         this.bedtime = bedtime.getTime();
+        if(mainImage != null){
+            this.mainImage.setImageResource(R.drawable.main_page);
+        }
+
     }
 
     public void setGrowing(boolean growing) {

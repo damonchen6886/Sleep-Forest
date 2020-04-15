@@ -18,6 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
+import android.widget.ImageView;
 
 import java.util.Calendar;
 
@@ -67,6 +68,13 @@ public class MainActivity extends AppCompatActivity implements OnRegisterSuccess
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
@@ -95,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements OnRegisterSuccess
         HomeFragment home = (HomeFragment) getSupportFragmentManager().findFragmentById(R.id.nav_home);
         if (home != null){
         home.setBedtime(time);
+
         }
        else{
            HomeFragment newHome = new HomeFragment();
