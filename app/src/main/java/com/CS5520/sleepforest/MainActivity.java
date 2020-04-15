@@ -103,11 +103,18 @@ public class MainActivity extends AppCompatActivity implements OnRegisterSuccess
         HomeFragment home = (HomeFragment) getSupportFragmentManager().findFragmentById(R.id.nav_home);
         if (home != null){
         home.setBedtime(time);
+        home.setImageSrc(R.drawable.main_page);
 
         }
        else{
            HomeFragment newHome = new HomeFragment();
            newHome.setBedtime(time);
+//            newHome.setImageSrc(R.drawable.main_page);
+
+            Bundle bundle = new Bundle();
+
+            bundle.putInt("image", R.drawable.main_page);
+            newHome.setArguments(bundle);
 
            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -116,8 +123,8 @@ public class MainActivity extends AppCompatActivity implements OnRegisterSuccess
            transaction
                    .setCustomAnimations(R.anim.nav_default_enter_anim,
                            R.anim.nav_default_exit_anim)
-                   .replace(R.id.nav_host_fragment, newHome)
-                   .hide(newHome);
+                   .replace(R.id.nav_host_fragment, newHome);
+               //    .hide(newHome);
            transaction.addToBackStack(null);
 
            // Commit the transaction
