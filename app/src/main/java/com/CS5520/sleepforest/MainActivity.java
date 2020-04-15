@@ -18,7 +18,11 @@ import androidx.core.view.GravityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
+import androidx.navigation.NavGraph;
+import androidx.navigation.NavInflater;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
@@ -57,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements OnRegisterSuccess
         navigationView.setNavigationItemSelectedListener(this);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
+        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_blank,
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
                 R.id.nav_tools)
                 .setDrawerLayout(drawer)
@@ -172,7 +176,8 @@ public class MainActivity extends AppCompatActivity implements OnRegisterSuccess
             case R.id.nav_slideshow:
                 SlideshowFragment slideshowFragment = new SlideshowFragment();
 
-                fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, slideshowFragment).commit();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.nav_host_fragment, slideshowFragment).commit();
                 break;
             case R.id.nav_gallery:
                 ShopFragment shopFragment = new ShopFragment();
