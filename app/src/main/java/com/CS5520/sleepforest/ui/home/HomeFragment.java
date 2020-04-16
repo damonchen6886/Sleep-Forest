@@ -98,6 +98,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
             textView.setText("Please go to setting to \nset your time to go to bed");
         }
         mainImage = root.findViewById(R.id.imageViewMain);
+
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
 //            @Override
 //            public void onChanged(@Nullable String s) {
@@ -105,6 +106,25 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 //
 //            }
 //        });
+
+        mainImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (growing && sensorDetedtedTime != null){
+                    // TODO: get coins.
+                    // TODO: reset state
+                }
+            }
+        });
+        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                textView.setText(s);
+
+            }
+        });
+
        // screenReceiver = new ScreenReceiver();
         IntentFilter screenStatusIF = new IntentFilter();
         //screenStatusIF.addAction(Intent.ACTION_SCREEN_ON);
@@ -161,7 +181,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
             mAccel = mAccel * 0.9f + delta;
             // Make this higher or lower according to how much
             // motion you want to detect
-            if(mAccel > 3){
+            if(mAccel > 3 && growing){
                 // do something
                 sensorDetedtedTime = new Date();
                 int[] diff = getTimeDiff(sensorDetedtedTime, getBedtime());
