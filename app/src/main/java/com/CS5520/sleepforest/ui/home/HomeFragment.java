@@ -48,7 +48,8 @@ public class HomeFragment extends Fragment {
             int diffh = diff[0];
             int diffm = diff[1];
             Log.e(TAG, "SCREEN_OFF");
-            Log.e("time diff", diffh + "");
+            Log.e("time diffh", diffh + "");
+            Log.e("time diffm", diffh + "");
 
             if ((diffh == 0 && diffm <=10) || (diffh <= 0 && diffm <=0)){
                 return;

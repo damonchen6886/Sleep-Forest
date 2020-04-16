@@ -60,34 +60,34 @@ public class ToolsFragment extends Fragment {
         final Intent intent = new Intent(getActivity(), AlarmReceiverActivity.class);
         final PendingIntent pendint = PendingIntent.getBroadcast(getActivity(),
                 2, intent, 0);
-        int hour, minute;
-        if (Build.VERSION.SDK_INT >= 23 ){
-            hour = picker.getHour();
-            minute = picker.getMinute();
-
-        }
-        else{
-            hour = 23;
-            minute = 0;
-        }
-//        if (setHour != 0&& setMin != 0){
-            Calendar cal = Calendar.getInstance();
-            cal.setTimeInMillis(System.currentTimeMillis());
-            cal.set(Calendar.HOUR_OF_DAY, hour);
-            cal.set(Calendar.MINUTE, minute);
-            cal.set(Calendar.SECOND, 00);
-            //Intent intent = new Intent(getActivity(), AlarmReceiverActivity.class);
-            //PendingIntent pendint = PendingIntent.getBroadcast(getActivity(),
-            //        2, intent, 0);
-
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-                    cal.getTimeInMillis(), 1000 * 60 * 60 * 24, pendint);
-
-            Toast.makeText(getActivity(), "Alarm Set", Toast.LENGTH_SHORT).show();
-            onRegisterSuccessListener.onRegisterSuccess(cal);
-
-
-        //}
+//        int hour, minute;
+//        if (Build.VERSION.SDK_INT >= 23 ){
+//            hour = picker.getHour();
+//            minute = picker.getMinute();
+//
+//        }
+//        else{
+//            hour = 23;
+//            minute = 0;
+//        }
+////        if (setHour != 0&& setMin != 0){
+//            Calendar cal = Calendar.getInstance();
+//            cal.setTimeInMillis(System.currentTimeMillis());
+//            cal.set(Calendar.HOUR_OF_DAY, hour);
+//            cal.set(Calendar.MINUTE, minute);
+//            cal.set(Calendar.SECOND, 00);
+//            //Intent intent = new Intent(getActivity(), AlarmReceiverActivity.class);
+//            //PendingIntent pendint = PendingIntent.getBroadcast(getActivity(),
+//            //        2, intent, 0);
+//
+//            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+//                    cal.getTimeInMillis(), 1000 * 60 * 60 * 24, pendint);
+//
+//            Toast.makeText(getActivity(), "Alarm Set", Toast.LENGTH_SHORT).show();
+//            onRegisterSuccessListener.onRegisterSuccess(cal);
+//
+//
+//        //}
         Button ok = getView().findViewById(R.id.settingOK);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
