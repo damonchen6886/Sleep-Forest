@@ -24,7 +24,6 @@ public class ToolsViewModel extends AndroidViewModel {
         super(application);
         mText = new MutableLiveData<>();
         mText.setValue("Time to go to bed：");
-        repository =
         repository = new TimeRepository(application);
         alltimes = repository.getTimes();
         results = repository.getResults();

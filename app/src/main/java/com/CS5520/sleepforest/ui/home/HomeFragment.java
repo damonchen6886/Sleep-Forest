@@ -92,6 +92,15 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView textView = root.findViewById(R.id.text_home);
         mainImage = root.findViewById(R.id.imageViewMain);
+        mainImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (growing && sensorDetedtedTime != null){
+                    // TODO: get coins.
+                }
+            }
+        });
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
@@ -155,7 +164,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
             mAccel = mAccel * 0.9f + delta;
             // Make this higher or lower according to how much
             // motion you want to detect
-            if(mAccel > 3){
+            if(mAccel > 3 && growing){
                 // do something
                 sensorDetedtedTime = new Date();
                 Log.e(TAG, "HANDPHONE_SHAKE: " + sensorDetedtedTime.toString());
