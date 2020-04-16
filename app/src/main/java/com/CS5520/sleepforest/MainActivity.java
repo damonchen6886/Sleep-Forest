@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements OnRegisterSuccess
    // private ScreenReceiver screenReceiver;
     private boolean communicationRegistered = false;
     private Calendar time;
-    private int treeId;
+    private int treeId=1;
     private AppBarConfiguration mAppBarConfiguration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

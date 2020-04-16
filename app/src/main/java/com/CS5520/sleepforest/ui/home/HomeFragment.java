@@ -36,6 +36,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class HomeFragment extends Fragment implements SensorEventListener{
    // final int SLEEPHOUR = 9;
     private int imageSrc;
+    private TextView textView;
     private HomeViewModel homeViewModel;
     private BroadcastReceiver screenOffReceiver = new BroadcastReceiver() {
         @Override
@@ -50,7 +51,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
             int diffm = diff[1];
             Log.e(TAG, "SCREEN_OFF");
             Log.e("time diffh", diffh + "");
-            Log.e("time diffm", diffh + "");
+            Log.e("time diffm", diffm + "");
 
             if ((diffh == 0 && diffm <=10) || (diffh <= 0 && diffm <=0)){
                 return;
@@ -90,8 +91,22 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
+        textView = root.findViewById(R.id.text_home);
+        if (imageSrc != R.drawable.main_page2){
+            textView.setText("Tree is growing while phone is locked");
+        }else{
+            textView.setText("Please go to setting to \nset your time to go to bed");
+        }
         mainImage = root.findViewById(R.id.imageViewMain);
+
+//        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//
+//            }
+//        });
+
         mainImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,6 +124,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
             }
         });
+
        // screenReceiver = new ScreenReceiver();
         IntentFilter screenStatusIF = new IntentFilter();
         //screenStatusIF.addAction(Intent.ACTION_SCREEN_ON);
@@ -168,6 +184,40 @@ public class HomeFragment extends Fragment implements SensorEventListener{
             if(mAccel > 3 && growing){
                 // do something
                 sensorDetedtedTime = new Date();
+                int[] diff = getTimeDiff(sensorDetedtedTime, getBedtime());
+                int diffh = diff[0];
+                int diffm = diff[1];
+                Log.e(TAG, "SENSOR_DETEDTED_TIME");
+                Log.e("time diffh", diffh + "");
+                Log.e("time diffm", diffm + "");
+                if (growing && diffh >= 6){
+                    textView.setText("tap the tree to get coins");
+                    switch(treeId){
+                        case 0:
+                            setGrowing(false);
+                            break;
+                        case 1:
+                            mainImage.setImageResource(R.drawable.main_shop1);
+                            setGrowing(false);
+                            break;
+                        case 2:
+                            mainImage.setImageResource(R.drawable.main_shop2);
+                            setGrowing(false);
+                            break;
+                        case 3:
+                            mainImage.setImageResource(R.drawable.main_shop3);
+                            setGrowing(false);
+                            break;
+                        case 4:
+                            mainImage.setImageResource(R.drawable.main_shop4);
+                            setGrowing(false);
+                            break;
+                        default:
+
+
+                    }
+
+                }
                 Log.e(TAG, "HANDPHONE_SHAKE: " + sensorDetedtedTime.toString());
 
             }
