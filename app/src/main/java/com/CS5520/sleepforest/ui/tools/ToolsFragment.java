@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -84,6 +85,7 @@ public class ToolsFragment extends Fragment {
 
             Toast.makeText(getActivity(), "Alarm Set", Toast.LENGTH_SHORT).show();
             onRegisterSuccessListener.onRegisterSuccess(cal);
+
 
         //}
         Button ok = getView().findViewById(R.id.settingOK);
