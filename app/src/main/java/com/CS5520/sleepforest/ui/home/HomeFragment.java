@@ -56,6 +56,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                 return;
             }
             setGrowing(false);
+            mainImage.setImageResource(R.drawable.main_fail);
         }
     };
     private Date bedtime;
@@ -207,7 +208,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         }
         long mills = current.getTime() - bedtime.getTime();
         int hours = (int) (mills/(1000 * 60 * 60));
-        int mins = (int) (mills % (1000*60*60));
+        int mins = (int) (mills % (1000*60*60)/(60*1000));
 
         return new int[]{hours, mins};
 
