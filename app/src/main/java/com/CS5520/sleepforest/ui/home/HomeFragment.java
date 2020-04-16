@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.hardware.Sensor;
+import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
@@ -31,7 +32,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements SensorEventListener{
    // final int SLEEPHOUR = 9;
     private HomeViewModel homeViewModel;
     private BroadcastReceiver screenOffReceiver = new BroadcastReceiver() {
@@ -51,10 +52,17 @@ public class HomeFragment extends Fragment {
         }
     };
     private Date bedtime;
+    private Date sensorDetedtedTime;
     private boolean fail=false;
     private boolean growing = true;
     private SensorManager sensorManager;
-    private MovementListener sensorEventListener;
+    private Sensor accelerometer;
+
+    private float[] mGravity;
+    private float mAccel;
+    private float mAccelCurrent;
+    private float mAccelLast;
+    // private MovementListener sensorEventListener;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
@@ -75,20 +83,68 @@ public class HomeFragment extends Fragment {
         screenStatusIF.addAction(Intent.ACTION_SCREEN_OFF);
         getActivity().registerReceiver(screenOffReceiver, screenStatusIF);
 
+        // accelerometer sensor
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
-        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        if (sensor != null) {
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        if (accelerometer != null) {
             Log.e(TAG, "GRAVITY supports");
         } else {
             Log.e(TAG, "no GRAVITY supports");
         }
+        mAccel = 0.00f;
+        mAccelCurrent = SensorManager.GRAVITY_EARTH;
+        mAccelLast = SensorManager.GRAVITY_EARTH;
 
-        sensorEventListener = new MovementListener();
-        sensorManager.registerListener(sensorEventListener,sensor,SensorManager.SENSOR_DELAY_NORMAL);
+        // sensorEventListener = new MovementListener();
+        // sensorManager.registerListener(sensorEventListener,sensor,SensorManager.SENSOR_DELAY_NORMAL);
 
         if (this.bedtime != null){
         Log.e(TAG,this.bedtime.toString());}
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
+        Log.e(TAG, "nResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
+        Log.e(TAG, "nPause");
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
+            Log.e(TAG, "onSensorChanged");
+            mGravity = event.values.clone();
+            // Shake detection
+            float x = mGravity[0];
+            float y = mGravity[1];
+            float z = mGravity[2];
+            mAccelLast = mAccelCurrent;
+            mAccelCurrent = (float)Math.sqrt(x*x + y*y + z*z);
+            float delta = mAccelCurrent - mAccelLast;
+            mAccel = mAccel * 0.9f + delta;
+            // Make this higher or lower according to how much
+            // motion you want to detect
+            if(mAccel > 3){
+                // do something
+                sensorDetedtedTime = new Date();
+                Log.e(TAG, "HANDPHONE_SHAKE: " + sensorDetedtedTime.toString());
+
+            }
+        }
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
 
     public void setBedtime(Calendar bedtime) {
