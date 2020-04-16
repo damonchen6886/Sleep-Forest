@@ -98,6 +98,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
                 if (growing && sensorDetedtedTime != null){
                     // TODO: get coins.
+                    // TODO: reset state
                 }
             }
         });
