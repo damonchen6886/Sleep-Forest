@@ -36,11 +36,13 @@ import android.widget.ImageView;
 import java.sql.Date;
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity implements OnRegisterSuccessListener, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements OnRegisterSuccessListener,
+        NavigationView.OnNavigationItemSelectedListener, ShopListner {
 
    // private ScreenReceiver screenReceiver;
     private boolean communicationRegistered = false;
     private Calendar time;
+    private int treeId;
     private AppBarConfiguration mAppBarConfiguration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,9 +163,11 @@ public class MainActivity extends AppCompatActivity implements OnRegisterSuccess
         switch(menuItem.getItemId()){
             case R.id.nav_home:
                 HomeFragment homeFragment = new HomeFragment();
+                homeFragment.setTreeId(treeId);
                 if (communicationRegistered){
                     homeFragment.setBedtime(time);
                     homeFragment.setGrowing(true);
+
 //            newHome.setImageSrc(R.drawable.main_page);
 
                     Bundle bundle = new Bundle();
@@ -199,4 +203,13 @@ public class MainActivity extends AppCompatActivity implements OnRegisterSuccess
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    public void sendToHome(int treeId) {
+        this.treeId = treeId;
+
+
+    }
 }
+
+

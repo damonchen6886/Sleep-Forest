@@ -1,5 +1,7 @@
 package com.CS5520.sleepforest.ui.Shop;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +16,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import com.CS5520.sleepforest.R;
+import com.CS5520.sleepforest.Shop;
+import com.CS5520.sleepforest.ShopListner;
 
 public class ShopFragment extends Fragment {
 
     private ShopViewModel shopViewModel;
+    private ShopListner shopListner;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -33,24 +38,29 @@ public class ShopFragment extends Fragment {
         shopTree1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                shopListner.sendToHome(1);
                 Toast.makeText(getContext(),"congratulation! the tree1 successfully Purchased",Toast.LENGTH_SHORT).show();
             }
         });
         shopTree2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                shopListner.sendToHome(2);
                 Toast.makeText(getContext(),"congratulations! the tree2 successfully Purchased",Toast.LENGTH_SHORT).show();
             }
         });
         shopTree3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                shopListner.sendToHome(3);
                 Toast.makeText(getContext(),"congratulation! the tree3 successfully Purchased",Toast.LENGTH_SHORT).show();
             }
         });
         shopTree4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                shopListner.sendToHome(4);
                 Toast.makeText(getContext(),"congratulation! the tree4 successfully Purchased",Toast.LENGTH_SHORT).show();
             }
         });
@@ -70,5 +80,14 @@ public class ShopFragment extends Fragment {
 //        Button tree1 = root.findViewById
 //    }
 
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        shopListner = (ShopListner) activity;
 
+
+
+
+    }
 }
