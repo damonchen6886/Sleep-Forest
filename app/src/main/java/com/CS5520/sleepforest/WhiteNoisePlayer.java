@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -103,15 +104,29 @@ public class WhiteNoisePlayer extends AppCompatActivity {
 
     }
 
-    private void play(int extra) {
+    private void play(final int extra) {
         //R.raw.pn01
         mp = MediaPlayer.create(this, extra);
-        mp.setLooping(true);
         mp.seekTo(0);
         mp.setVolume(0.5f, 0.5f);
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.seekTo(0);
+                mp.pause();
+                playBtn.setBackgroundResource(R.drawable.play);
+            }
+        });
         totalTime = mp.getDuration();
         mp.start();
     }
+
+//    private void stopPlayer(int extra) {
+//        mp.release();
+//        mp = null;
+//        mp = MediaPlayer.create(this, extra);
+//        Log.i("Media Player", "release player");
+//    }
 
     public void playBtnClick(View view) {
         if (mp.isPlaying()) {
@@ -146,8 +161,21 @@ public class WhiteNoisePlayer extends AppCompatActivity {
         int sec = time / 1000 % 60;
 
         timeLabel = min + ":";
+        if (sec < 0) sec = 0;
         if (sec < 10) timeLabel += "0";
         timeLabel += sec;
         return timeLabel;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mp.stop();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mp.stop();
     }
 }
