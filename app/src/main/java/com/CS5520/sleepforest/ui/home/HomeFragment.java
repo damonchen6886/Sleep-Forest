@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -34,16 +35,22 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class HomeFragment extends Fragment implements SensorEventListener{
    // final int SLEEPHOUR = 9;
+    private int imageSrc;
     private HomeViewModel homeViewModel;
     private BroadcastReceiver screenOffReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            if (!growing){
+                return ;
+            }
+
             Date current = new Date();
             int[] diff = getTimeDiff(current, getBedtime());
             int diffh = diff[0];
             int diffm = diff[1];
             Log.e(TAG, "SCREEN_OFF");
-            Log.e(TAG, diff + "");
+            Log.e("time diffh", diffh + "");
+            Log.e("time diffm", diffh + "");
 
             if ((diffh == 0 && diffm <=10) || (diffh <= 0 && diffm <=0)){
                 return;
@@ -54,7 +61,8 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     private Date bedtime;
     private Date sensorDetedtedTime;
     private boolean fail=false;
-    private boolean growing = true;
+    private boolean growing = false;
+    private ImageView mainImage;
     private SensorManager sensorManager;
     private Sensor accelerometer;
 
@@ -64,13 +72,25 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     private float mAccelLast;
     // private MovementListener sensorEventListener;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            imageSrc = getArguments().getInt("image");
+        }
+        else {
+            imageSrc = R.drawable.main_page2;
+        }
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
+        mainImage = root.findViewById(R.id.imageViewMain);
+        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
@@ -98,8 +118,8 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         // sensorEventListener = new MovementListener();
         // sensorManager.registerListener(sensorEventListener,sensor,SensorManager.SENSOR_DELAY_NORMAL);
 
-        if (this.bedtime != null){
-        Log.e(TAG,this.bedtime.toString());}
+        mainImage.setImageResource(imageSrc);
+
         return root;
     }
 
@@ -149,6 +169,8 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
     public void setBedtime(Calendar bedtime) {
         this.bedtime = bedtime.getTime();
+        Log.e(TAG,this.bedtime.toString());
+
     }
 
     public void setGrowing(boolean growing) {
@@ -157,6 +179,24 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
     public Date getBedtime() {
         return bedtime;
+
+
+    }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        if (imageSrc == 0) {
+//            mainImage.setImageResource(R.drawable.main_page2);
+//
+//        } else {
+//            mainImage.setImageResource(imageSrc);
+//        }
+//    }
+
+    public void setImageSrc(int imageSrc) {
+        this.imageSrc = imageSrc;
+       // Log.e("image",this.imageSrc + "");
     }
 
     private int[] getTimeDiff(Date current, Date bedtime){
