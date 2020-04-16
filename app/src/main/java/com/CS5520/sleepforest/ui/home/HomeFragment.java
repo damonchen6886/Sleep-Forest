@@ -39,12 +39,16 @@ public class HomeFragment extends Fragment {
     private BroadcastReceiver screenOffReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            if (!growing){
+                return ;
+            }
+
             Date current = new Date();
             int[] diff = getTimeDiff(current, getBedtime());
             int diffh = diff[0];
             int diffm = diff[1];
             Log.e(TAG, "SCREEN_OFF");
-            Log.e(TAG, diff + "");
+            Log.e("time diff", diffh + "");
 
             if ((diffh == 0 && diffm <=10) || (diffh <= 0 && diffm <=0)){
                 return;
@@ -54,7 +58,7 @@ public class HomeFragment extends Fragment {
     };
     private Date bedtime;
     private boolean fail=false;
-    private boolean growing = true;
+    private boolean growing = false;
     private ImageView mainImage;
     private SensorManager sensorManager;
     private MovementListener sensorEventListener;

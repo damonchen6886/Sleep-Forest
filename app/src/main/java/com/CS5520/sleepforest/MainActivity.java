@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity implements OnRegisterSuccess
                 HomeFragment homeFragment = new HomeFragment();
                 if (communicationRegistered){
                     homeFragment.setBedtime(time);
+                    homeFragment.setGrowing(true);
 //            newHome.setImageSrc(R.drawable.main_page);
 
                     Bundle bundle = new Bundle();
