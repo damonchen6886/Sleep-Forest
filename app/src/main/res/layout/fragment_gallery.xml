@@ -6,174 +6,392 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <TextView
-        android:id="@+id/tree2Price"
-        android:layout_width="0dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="68dp"
-        android:text="800"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tree1Price"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
-    <Button
-        android:id="@+id/tree2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="170dp"
-        android:text="Purchase"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.784"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tree2Price"
-        app:layout_constraintVertical_bias="0.065" />
-
-    <TextView
-        android:id="@+id/text_gallery"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <Button
-        android:id="@+id/tree1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="170dp"
-        android:text="Purchase"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tree2"
-        app:layout_constraintHorizontal_bias="0.443"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tree1Price"
-        app:layout_constraintVertical_bias="0.061" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="162dp"
-        android:layout_height="183dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="65dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/shop1" />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/text_gallery"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="67dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="110dp"
+                    android:text="aaaaaa"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="161dp"
-        android:layout_height="182dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.977"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/shop2" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="162dp"
-        android:layout_height="183dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="110dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.961"
-        app:srcCompat="@drawable/shop3" />
+            </TableRow>
 
-    <Button
-        android:id="@+id/tree4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Purchase"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.784"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tree2"
-        app:layout_constraintVertical_bias="0.849" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
 
-    <TextView
-        android:id="@+id/tree4Price"
-        android:layout_width="0dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="68dp"
-        android:text="2000"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tree3Price"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/tree3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Purchase"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tree4"
-        app:layout_constraintHorizontal_bias="0.443"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tree1"
-        app:layout_constraintVertical_bias="0.849" />
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="162dp"
+                        android:layout_height="183dp"
+                        android:layout_gravity="start"
+                        app:srcCompat="@drawable/shop0" />
+                    <!--                        android:layout_marginStart="20dp"-->
+                    <!--                        android:layout_marginTop="65dp"-->
 
-    <TextView
-        android:id="@+id/tree3Price"
-        android:layout_width="0dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="67dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="110dp"
-        android:text="1200"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/tree4Price"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+                </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="162dp"
-        android:layout_height="183dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="110dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.961"
-        app:srcCompat="@drawable/shop4" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tree1Price"
-        android:layout_width="0dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="67dp"
-        android:layout_marginEnd="110dp"
-        android:text="600"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/tree2Price"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="162dp"
+                        android:layout_height="183dp"
+                        android:layout_gravity="end"
+                        app:srcCompat="@drawable/shop1" />
+                    <!--                        android:layout_marginStart="20dp"-->
+                    <!--                        android:layout_marginTop="65dp"-->
+
+                </LinearLayout>
+
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tree0Price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:text="0"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+
+                    <!--                    android:layout_marginStart="67dp"-->
+                    <!--                    android:layout_marginEnd="110dp"-->
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tree1Price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="30dp"
+                        android:text="600"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>>
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/tree0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="18dp"
+
+                        android:text="Default" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/tree1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="30dp"
+
+                        android:text="Purchase" />
+                </LinearLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="162dp"
+                        android:layout_height="183dp"
+                        android:layout_gravity="start"
+                        app:srcCompat="@drawable/shop2" />
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        android:layout_marginTop="65dp"-->
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="161dp"
+                        android:layout_height="182dp"
+                        android:layout_gravity="end"
+                        app:srcCompat="@drawable/shop3" />
+<!--                        android:layout_marginTop="65dp"-->
+<!--                        android:layout_marginEnd="20dp"-->
+
+                </LinearLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tree2Price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:text="800"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+
+<!--                    android:layout_marginStart="67dp"-->
+<!--                    android:layout_marginEnd="110dp"-->
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tree3Price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="30dp"
+                    android:text="1200"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+                </LinearLayout>>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/tree2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="18dp"
+
+                    android:text="Purchase" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/tree3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="30dp"
+
+                    android:text="Purchase" />
+                </LinearLayout>
+
+            </TableRow>
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="161dp"
+                        android:layout_height="182dp"
+                        android:layout_gravity="start"
+                        app:srcCompat="@drawable/shop4" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="161dp"
+                        android:layout_height="182dp"
+                        android:layout_gravity="end"
+                        app:srcCompat="@drawable/shop5" />
+
+                </LinearLayout>
+
+
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tree4Price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:text="2000"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+
+                    <!--                    android:layout_marginStart="67dp"-->
+                    <!--                    android:layout_marginEnd="110dp"-->
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tree5Price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="30dp"
+                        android:text="10000"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>>
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/tree4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="18dp"
+
+                        android:text="Purchase" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/tree5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="30dp"
+
+                        android:text="Purchase" />
+                </LinearLayout>
+
+            </TableRow>
+
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/empty"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="67dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="110dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+
+
+
+        </TableLayout>
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
