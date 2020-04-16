@@ -133,7 +133,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     @Override
     public void onPause() {
         super.onPause();
-        sensorManager.unregisterListener(this);
+//        sensorManager.unregisterListener(this);
         Log.e(TAG, "nPause");
     }
 
