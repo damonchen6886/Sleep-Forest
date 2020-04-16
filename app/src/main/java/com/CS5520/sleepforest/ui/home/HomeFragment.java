@@ -64,6 +64,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     private boolean growing = false;
     private ImageView mainImage;
     private SensorManager sensorManager;
+    private int treeId;
     private Sensor accelerometer;
 
     private float[] mGravity;
@@ -119,6 +120,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         // sensorManager.registerListener(sensorEventListener,sensor,SensorManager.SENSOR_DELAY_NORMAL);
 
         mainImage.setImageResource(imageSrc);
+        Log.e("tree", this.treeId + "");
 
         return root;
     }
@@ -209,5 +211,9 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
         return new int[]{hours, mins};
 
+    }
+
+    public void setTreeId(int treeId) {
+        this.treeId = treeId;
     }
 }
