@@ -12,12 +12,15 @@ import androidx.lifecycle.ViewModel;
 
 import com.CS5520.sleepforest.Shop;
 import com.CS5520.sleepforest.ShopRepository;
+import com.CS5520.sleepforest.Time;
+
+import java.util.List;
 
 public class HomeViewModel extends AndroidViewModel {
 
     private ShopRepository shopRepository;
-    private int coins;
-    private MutableLiveData<Integer> results;
+    private LiveData<List<Shop>>  allshops;
+    private MutableLiveData<List<Shop>> results;
 
     private MutableLiveData<String> mText;
 
@@ -26,30 +29,31 @@ public class HomeViewModel extends AndroidViewModel {
         mText = new MutableLiveData<>();
         mText.setValue("This is home fragment");
         shopRepository = new ShopRepository(application);
-        coins = shopRepository.getCoins();
+        allshops= shopRepository.getShops();
         results = shopRepository.getResults();
     }
 
-    public MutableLiveData<Integer> getResults(){
+    public MutableLiveData<List<Shop>> getResults(){
         return results;
     }
-    public int getCoins(){
-        return coins;
+    public LiveData<List<Shop>> getCoins(){
+
+        return allshops;
     }
     public void insertCoin(Shop shop){
         shopRepository.insertShop(shop);
 
     }
-    public void updateCoin(int num){
-        shopRepository.updateCoins(num);
-    }
+//    public void updateCoin(int num){
+//        shopRepository.updateCoins(num);
+//    }
 
     public void deleteCoin(){
         shopRepository.deleteShop();
     }
 
-    public void  findCurrentCoin(String column){
-        shopRepository.findCurrentCoins(column);
+    public void  findCoin(int id){
+        shopRepository.findShop(id);
     }
 
 

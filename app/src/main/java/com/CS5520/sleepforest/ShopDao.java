@@ -1,5 +1,6 @@
 package com.CS5520.sleepforest;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Database;
 import androidx.room.Delete;
@@ -10,20 +11,18 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface ShopDao {
+interface ShopDao {
     @Insert
     void insertShop(Shop shop);
 
-    @Query("SELECT :totalCoins FROM shop where shopId = 0")
-    int findCurrentCoins(String totalCoins);
+    @Query("SELECT * FROM shop where shopId = :id")
+    List<Shop> findShop(int id);
 
-    @Query("UPDATE SHOP SET totalCoins  = (select totalCoins from  shop where shopId = 0) + :numbers WHERE shopId = 0")
-    void updateCoins(int numbers);
 
-//    @Query("UPDATE SHOP SET totalCoins  = :coins WHERE shopId = 0")
-//    int addCoins(int coins);
-
-    @Query("DELETE FROM SHOP where shopId = 0")
+    @Query("DELETE FROM shop")
     void deleteShop();
+
+    @Query("SELECT * FROM shop")
+    LiveData<List<Shop>> getAllShops();
 
 }

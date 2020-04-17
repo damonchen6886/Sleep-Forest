@@ -3,6 +3,7 @@ package com.CS5520.sleepforest;
 import android.app.Application;
 import android.os.AsyncTask;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.Collections;
@@ -10,39 +11,35 @@ import java.util.List;
 
 public class ShopRepository {
     private ShopDao shopDao;
-    private MutableLiveData<Integer> results = new MutableLiveData<>();
-    private int currentCoins;
+    private MutableLiveData<List<Shop>> results = new MutableLiveData<>();
+    private LiveData<List<Shop>> shops;
 
     public ShopRepository(Application application){
         ShopRoomDatabase db;
         db= ShopRoomDatabase.getDatabase(application);
         shopDao = db.shopDao();
 
-        currentCoins = shopDao.findCurrentCoins("totalCoins");
+       shops= shopDao.getAllShops();
     }
 
-    private void asyncFinished(Integer r) {
-        results.setValue(r);
-    }
+    private void asyncFinished(List<Shop> r){results.setValue(r);}
 
-    private static class QueryAsyncTask extends AsyncTask<String, Void,  Integer> {
+    private static class QueryAsyncTask extends AsyncTask<Integer, Void,  List<Shop>>{
         private ShopDao asyncTaskDao;
         private ShopRepository delegate = null;
         QueryAsyncTask(ShopDao dao){
             asyncTaskDao = dao;
         }
         @Override
-        protected Integer doInBackground(final String... parms) {
-            return asyncTaskDao.findCurrentCoins(parms[0]);
+        protected List<Shop> doInBackground(Integer... integers) {
+            return asyncTaskDao.findShop(integers[0]);
         }
 
         @Override
-        protected void onPostExecute(Integer result){
-            delegate.asyncFinished(result);
+        protected void onPostExecute(List<Shop> shops){
+            delegate.asyncFinished(shops);
         }
     }
-
-
 
     private static class InsertAsyncTask extends AsyncTask<Shop, Void, Void> {
 
@@ -59,9 +56,6 @@ public class ShopRepository {
         }
     }
 
-
-
-
     private static class DeleteAsyncTask extends AsyncTask<Void, Void, Void> {
 
         private ShopDao asyncTaskDao;
@@ -77,63 +71,31 @@ public class ShopRepository {
         }
     }
 
+    public void insertShop(Shop shop){
+        ShopRepository.InsertAsyncTask task = new ShopRepository.InsertAsyncTask(shopDao);
+        task.execute(shop);
 
-    private static class UpdateAsyncTask extends AsyncTask<Integer, Void, Void> {
-
-        private ShopDao asyncTaskDao;
-
-        UpdateAsyncTask(ShopDao dao) {
-            asyncTaskDao = dao;
-        }
-
-        @Override
-        protected Void doInBackground(Integer... integers) {
-            asyncTaskDao.updateCoins(integers[0]);
-            return null;
-        }
     }
 
-
-
     public void deleteShop(){
-        DeleteAsyncTask task = new DeleteAsyncTask(shopDao);
+        ShopRepository.DeleteAsyncTask task = new ShopRepository.DeleteAsyncTask(shopDao);
         task.execute();
 
     }
 
-    public void insertShop(Shop shop){
-        InsertAsyncTask task = new InsertAsyncTask(shopDao);
-        task.execute(shop);
+    public LiveData<List<Shop>> getShops() {
+        return shops;
     }
 
-
-    public void updateCoins(int number){
-        UpdateAsyncTask task = new UpdateAsyncTask(shopDao);
-        task.execute(number);
-    }
-
-    public void findCurrentCoins(String column){
-        QueryAsyncTask task = new QueryAsyncTask(shopDao);
-        task.delegate = this;
-        task.execute(column);
-    }
-
-    public int getCoins(){
-        return currentCoins;
-    }
-
-    public MutableLiveData<Integer> getResults(){
+    public MutableLiveData<List<Shop>> getResults() {
         return results;
     }
 
-
-//    public void addCoins(Shop shop){
-//        InsertAsyncTask task = new InsertAsyncTask(shopDao);
-//        task.execute(shop);
-//    }
-
-
-
+    public void findShop(int id){
+        ShopRepository.QueryAsyncTask task = new ShopRepository.QueryAsyncTask(shopDao);
+        task.delegate = this;
+        task.execute(id);
+    }
 
 
 }

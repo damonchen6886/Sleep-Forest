@@ -34,7 +34,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class HomeFragment extends Fragment implements SensorEventListener{
-   // final int SLEEPHOUR = 9;
+    // final int SLEEPHOUR = 9;
     private int imageSrc;
     private TextView textView;
     private HomeViewModel homeViewModel;
@@ -100,13 +100,6 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         }
         mainImage = root.findViewById(R.id.imageViewMain);
 
-//        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//
-//            }
-//        });
 
         mainImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,15 +111,8 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                 }
             }
         });
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
 
-            }
-        });
-
-       // screenReceiver = new ScreenReceiver();
+        // screenReceiver = new ScreenReceiver();
         IntentFilter screenStatusIF = new IntentFilter();
         //screenStatusIF.addAction(Intent.ACTION_SCREEN_ON);
         screenStatusIF.addAction(Intent.ACTION_SCREEN_OFF);
@@ -247,20 +233,10 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        if (imageSrc == 0) {
-//            mainImage.setImageResource(R.drawable.main_page2);
-//
-//        } else {
-//            mainImage.setImageResource(imageSrc);
-//        }
-//    }
 
     public void setImageSrc(int imageSrc) {
         this.imageSrc = imageSrc;
-       // Log.e("image",this.imageSrc + "");
+        // Log.e("image",this.imageSrc + "");
     }
 
     private int[] getTimeDiff(Date current, Date bedtime){
