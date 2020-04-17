@@ -26,3 +26,4 @@ interface ShopDao {
     LiveData<List<Shop>> getAllShops();
 
 }
+

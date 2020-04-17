@@ -18,8 +18,6 @@ import androidx.lifecycle.ViewModelProviders;
 import com.CS5520.sleepforest.R;
 import com.CS5520.sleepforest.ShopListner;
 
-import org.w3c.dom.Text;
-
 public class ShopFragment extends Fragment {
 
     private ShopViewModel shopViewModel;
@@ -32,10 +30,10 @@ public class ShopFragment extends Fragment {
                 ViewModelProviders.of(this).get(ShopViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_shop, container, false);
         final TextView textView = root.findViewById(R.id.text_gallery);
-        Button shopTree1 = root.findViewById(R.id.tree1);
-        Button shopTree2 = root.findViewById(R.id.tree2);
-        Button shopTree3 = root.findViewById(R.id.tree3);
-        Button shopTree4 = root.findViewById(R.id.tree4);
+        final Button shopTree1 = root.findViewById(R.id.tree1);
+        final Button shopTree2 = root.findViewById(R.id.tree2);
+        final Button shopTree3 = root.findViewById(R.id.tree3);
+        final Button shopTree4 = root.findViewById(R.id.tree4);
         Button shopTree5 = root.findViewById(R.id.tree5);
         final TextView coins = root.findViewById(R.id.currentCoin);
         coins.setText(getArguments().getInt("coins") + "");
@@ -48,6 +46,7 @@ public class ShopFragment extends Fragment {
                     return ;
                 }
                 shopListner.sendToHome(1);
+                shopTree1.setClickable(false);
                 Toast.makeText(getContext(),"congratulation! the tree1 successfully Purchased",Toast.LENGTH_SHORT).show();
                 coins.setText(Integer.parseInt(coins.getText().toString()) - 600 + "");
             }
@@ -60,6 +59,7 @@ public class ShopFragment extends Fragment {
                     return ;
                 }
                 shopListner.sendToHome(2);
+                shopTree2.setClickable(false);
                 Toast.makeText(getContext(),"congratulations! the tree2 successfully Purchased",Toast.LENGTH_SHORT).show();
                 coins.setText(Integer.parseInt(coins.getText().toString()) - 800 + "");
             }
@@ -72,6 +72,7 @@ public class ShopFragment extends Fragment {
                     return ;
                 }
                 shopListner.sendToHome(3);
+                shopTree3.setClickable(false);
                 Toast.makeText(getContext(),"congratulation! the tree3 successfully Purchased",Toast.LENGTH_SHORT).show();
                 coins.setText(Integer.parseInt(coins.getText().toString()) - 1200 + "");
             }
@@ -85,6 +86,7 @@ public class ShopFragment extends Fragment {
                 }
 
                 shopListner.sendToHome(4);
+                shopTree4.setClickable(false);
                 Toast.makeText(getContext(),"congratulation! the tree4 successfully Purchased",Toast.LENGTH_SHORT).show();
                 coins.setText(Integer.parseInt(coins.getText().toString()) - 2000 + "");
             }
