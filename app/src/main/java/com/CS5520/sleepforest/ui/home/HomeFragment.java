@@ -170,7 +170,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
             public void onClick(View v) {
                // int coin = 30;
                 homeViewModel.deleteCoin();
-                homeViewModel.insertCoin(new Shop(1, 30));
+                homeViewModel.insertCoin(new Shop(1, 3000));
 
                 homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
                     @Override
