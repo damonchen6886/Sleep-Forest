@@ -15,7 +15,7 @@
         android:id="@+id/nav_gallery"
         android:name="com.CS5520.sleepforest.ui.Shop.ShopFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_shop" />
 
     <fragment
         android:id="@+id/nav_slideshow"

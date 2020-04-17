@@ -1,15 +1,11 @@
 package com.CS5520.sleepforest.ui.Shop;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,9 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import com.CS5520.sleepforest.R;
-import com.CS5520.sleepforest.Shop;
 import com.CS5520.sleepforest.ShopListner;
-import com.google.android.material.snackbar.Snackbar;
 
 public class ShopFragment extends Fragment {
 
@@ -34,7 +28,7 @@ public class ShopFragment extends Fragment {
             ViewGroup container, Bundle savedInstanceState) {
         shopViewModel =
                 ViewModelProviders.of(this).get(ShopViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
+        View root = inflater.inflate(R.layout.fragment_shop, container, false);
         final TextView textView = root.findViewById(R.id.text_gallery);
         Button shopTree1 = root.findViewById(R.id.tree1);
         Button shopTree2 = root.findViewById(R.id.tree2);

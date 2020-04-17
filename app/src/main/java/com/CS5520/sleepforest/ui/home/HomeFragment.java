@@ -1,5 +1,6 @@
 package com.CS5520.sleepforest.ui.home;
 
+import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
@@ -24,6 +26,8 @@ import androidx.lifecycle.ViewModelProviders;
 import com.CS5520.sleepforest.MovementListener;
 import com.CS5520.sleepforest.R;
 import com.CS5520.sleepforest.ScreenReceiver;
+import com.CS5520.sleepforest.Shop;
+import com.CS5520.sleepforest.ShopRepository;
 import com.CS5520.sleepforest.Time;
 
 import java.util.Calendar;
@@ -34,6 +38,8 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class HomeFragment extends Fragment implements SensorEventListener{
+    /////////
+    /////////
    // final int SLEEPHOUR = 9;
     private int imageSrc;
     private TextView textView;
@@ -74,6 +80,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     private float mAccelCurrent;
     private float mAccelLast;
     // private MovementListener sensorEventListener;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -149,6 +156,25 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         mainImage.setImageResource(imageSrc);
         Log.e("tree", this.treeId + "");
 
+        ///////////////////////////
+        Button testDatabase = root.findViewById(R.id.testCoin);
+        final TextView displaycoin = root.findViewById(R.id.getCoins);
+        testDatabase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // int coin = 30;
+                homeViewModel.deleteCoin();
+                homeViewModel.insertCoin(new Shop(30));
+
+            }
+        });
+        displaycoin.setText(homeViewModel.getCoins());
+//        homeViewModel.getText().observe(this, new Observer<String>() {
+//            @Override
+//            public void onChanged(String s) {
+//                displaycoin.setText();
+//            }
+//        });
         return root;
     }
 
@@ -277,4 +303,14 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     public void setTreeId(int treeId) {
         this.treeId = treeId;
     }
+
+    public int calculateCoins(){
+        // TODO int[] rate = {0,600,800,1200,2000,10000};
+        return 10;
+    }
+
+//    public void insertShop(Shop shop){
+//        shopRepository = new ShopRepository(get);
+//        shopRepository.insertShop(shop);
+//    }
 }

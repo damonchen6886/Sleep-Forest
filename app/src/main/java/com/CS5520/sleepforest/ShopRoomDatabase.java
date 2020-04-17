@@ -16,7 +16,7 @@ public abstract class ShopRoomDatabase extends RoomDatabase {
 
     static ShopRoomDatabase getDatabase(final Context context){
         if(INSTANCE == null){
-            synchronized (TimeRoomDatabase.class){
+            synchronized (ShopRoomDatabase.class){
                 if(INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             ShopRoomDatabase.class,"shop_database").build();

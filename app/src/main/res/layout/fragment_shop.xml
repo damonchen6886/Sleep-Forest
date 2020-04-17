@@ -32,6 +32,12 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/currentCoin"
+                    android:layout_width="163dp"
+                    android:layout_height="wrap_content"
+                    android:text="CurrentCoin" />
+
 
             </TableRow>
 

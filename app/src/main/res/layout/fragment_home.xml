@@ -33,4 +33,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_home" />
 
+    <Button
+        android:id="@+id/testCoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="testCoin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/getCoins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/testCoin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.948"
+        tools:layout_editor_absoluteX="176dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
