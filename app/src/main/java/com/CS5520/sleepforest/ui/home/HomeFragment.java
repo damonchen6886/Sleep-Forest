@@ -1,5 +1,7 @@
 package com.CS5520.sleepforest.ui.home;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
@@ -21,20 +24,27 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.CS5520.sleepforest.CoinsListener;
 import com.CS5520.sleepforest.MovementListener;
 import com.CS5520.sleepforest.R;
 import com.CS5520.sleepforest.ScreenReceiver;
+import com.CS5520.sleepforest.Shop;
+import com.CS5520.sleepforest.ShopRepository;
 import com.CS5520.sleepforest.Time;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 
 public class HomeFragment extends Fragment implements SensorEventListener{
+    /////////
+    /////////
     // final int SLEEPHOUR = 9;
+    private CoinsListener coinsListener;
     private int imageSrc;
     private TextView textView;
     private HomeViewModel homeViewModel;
@@ -56,7 +66,6 @@ public class HomeFragment extends Fragment implements SensorEventListener{
             if ((diffh == 0 && diffm <=10) || (diffh <= 0 && diffm <=0)){
                 return;
             }
-
             setGrowing(false);
             mainImage.setImageResource(R.drawable.main_fail);
         }
@@ -75,31 +84,41 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     private float mAccelCurrent;
     private float mAccelLast;
     // private MovementListener sensorEventListener;
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_home, container, false);
+    }
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         if (getArguments() != null) {
             imageSrc = getArguments().getInt("image");
         }
         else {
             imageSrc = R.drawable.main_page2;
         }
-    }
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+
+//    public View onCreateView(@NonNull LayoutInflater inflater,
+//                             ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        textView = root.findViewById(R.id.text_home);
+        // View root = inflater.inflate(R.layout.fragment_home, container, false);
+        textView = getView().findViewById(R.id.text_home);
         if (imageSrc != R.drawable.main_page2){
             textView.setText("Tree is growing while phone is locked");
         }else{
             textView.setText("Please go to setting to \nset your time to go to bed");
         }
-        mainImage = root.findViewById(R.id.imageViewMain);
+        mainImage = getView().findViewById(R.id.imageViewMain);
 
+//        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//
+//            }
+//        });
 
         mainImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,7 +155,35 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         mainImage.setImageResource(imageSrc);
         Log.e("tree", this.treeId + "");
 
-        return root;
+        ///////////////////////////
+        Button testDatabase = getView().findViewById(R.id.testCoin);
+        final TextView displaycoin = getView().findViewById(R.id.getCoins);
+        testDatabase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // int coin = 30;
+                homeViewModel.deleteCoin();
+                homeViewModel.insertCoin(new Shop(1, 3000));
+
+                homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
+                    @Override
+                    public void onChanged(@Nullable List<Shop> s) {
+                        if (s.size() >0){
+                            displaycoin.setText(s.get(0).getTotalCoins()+"");
+                            coinsListener.sendCoins(s.get(0).getTotalCoins());}
+
+                    }
+                });
+            }
+        });
+
+//        homeViewModel.getText().observe(this, new Observer<String>() {
+//            @Override
+//            public void onChanged(String s) {
+//                displaycoin.setText();
+//            }
+//        });
+        //  return root;
     }
 
     @Override
@@ -156,7 +203,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
-            Log.e(TAG, "onSensorChanged");
+            //  Log.e(TAG, "onSensorChanged");
             mGravity = event.values.clone();
             // Shake detection
             float x = mGravity[0];
@@ -233,6 +280,16 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
     }
 
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        if (imageSrc == 0) {
+//            mainImage.setImageResource(R.drawable.main_page2);
+//
+//        } else {
+//            mainImage.setImageResource(imageSrc);
+//        }
+//    }
 
     public void setImageSrc(int imageSrc) {
         this.imageSrc = imageSrc;
@@ -253,5 +310,21 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
     public void setTreeId(int treeId) {
         this.treeId = treeId;
+    }
+
+    public int calculateCoins(){
+        // TODO int[] rate = {0,600,800,1200,2000,10000};
+        return 10;
+    }
+
+    //    public void insertShop(Shop shop){
+//        shopRepository = new ShopRepository(get);
+//        shopRepository.insertShop(shop);
+//    }
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        coinsListener = (CoinsListener)activity;
     }
 }

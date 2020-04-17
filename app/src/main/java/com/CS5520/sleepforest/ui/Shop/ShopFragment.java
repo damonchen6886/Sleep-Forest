@@ -18,6 +18,8 @@ import androidx.lifecycle.ViewModelProviders;
 import com.CS5520.sleepforest.R;
 import com.CS5520.sleepforest.ShopListner;
 
+import org.w3c.dom.Text;
+
 public class ShopFragment extends Fragment {
 
     private ShopViewModel shopViewModel;
@@ -28,48 +30,76 @@ public class ShopFragment extends Fragment {
             ViewGroup container, Bundle savedInstanceState) {
         shopViewModel =
                 ViewModelProviders.of(this).get(ShopViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_shop, container, false);
+        final View root = inflater.inflate(R.layout.fragment_shop, container, false);
         final TextView textView = root.findViewById(R.id.text_gallery);
         Button shopTree1 = root.findViewById(R.id.tree1);
         Button shopTree2 = root.findViewById(R.id.tree2);
         Button shopTree3 = root.findViewById(R.id.tree3);
         Button shopTree4 = root.findViewById(R.id.tree4);
         Button shopTree5 = root.findViewById(R.id.tree5);
+        final TextView coins = root.findViewById(R.id.currentCoin);
+        coins.setText(getArguments().getInt("coins") + "");
+        final int current = Integer.parseInt(coins.getText().toString());
         shopTree1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (current < 600){
+                    Toast.makeText(getContext(),":( Need more coins",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 shopListner.sendToHome(1);
                 Toast.makeText(getContext(),"congratulation! the tree1 successfully Purchased",Toast.LENGTH_SHORT).show();
+                coins.setText(Integer.parseInt(coins.getText().toString()) - 600 + "");
             }
         });
         shopTree2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (current < 800){
+                    Toast.makeText(getContext(),":( Need more coins",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 shopListner.sendToHome(2);
                 Toast.makeText(getContext(),"congratulations! the tree2 successfully Purchased",Toast.LENGTH_SHORT).show();
+                coins.setText(Integer.parseInt(coins.getText().toString()) - 800 + "");
             }
         });
         shopTree3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (current < 1200){
+                    Toast.makeText(getContext(),":( Need more coins",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 shopListner.sendToHome(3);
                 Toast.makeText(getContext(),"congratulation! the tree3 successfully Purchased",Toast.LENGTH_SHORT).show();
+                coins.setText(Integer.parseInt(coins.getText().toString()) - 1200 + "");
             }
         });
         shopTree4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (current < 2000){
+                    Toast.makeText(getContext(),":( Need more coins",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
 
                 shopListner.sendToHome(4);
                 Toast.makeText(getContext(),"congratulation! the tree4 successfully Purchased",Toast.LENGTH_SHORT).show();
+                coins.setText(Integer.parseInt(coins.getText().toString()) - 2000 + "");
             }
         });
 
         shopTree5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (current < 10000){
+                    Toast.makeText(getContext(),":( Need more coins",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 popUpContack();
                 Toast.makeText(getContext(),"congratulation! the tree5 successfully Purchased",Toast.LENGTH_SHORT).show();
+                coins.setText(Integer.parseInt(coins.getText().toString()) - 10000 + "");
             }
         });
         shopViewModel.getText().observe(this, new Observer<String>() {

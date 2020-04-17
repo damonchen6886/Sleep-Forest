@@ -37,13 +37,14 @@ import java.sql.Date;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements OnRegisterSuccessListener,
-        NavigationView.OnNavigationItemSelectedListener, ShopListner {
+        NavigationView.OnNavigationItemSelectedListener, ShopListner, CoinsListener {
 
    // private ScreenReceiver screenReceiver;
     private boolean communicationRegistered = false;
     private Calendar time;
     private int treeId=1;
     private AppBarConfiguration mAppBarConfiguration;
+    private int currentCoins;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -186,6 +187,10 @@ public class MainActivity extends AppCompatActivity implements OnRegisterSuccess
                 break;
             case R.id.nav_gallery:
                 ShopFragment shopFragment = new ShopFragment();
+                Bundle bundle = new Bundle();
+
+                bundle.putInt("coins", currentCoins);
+                shopFragment.setArguments(bundle);
 
                 fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, shopFragment).commit();
                 break;
@@ -209,6 +214,11 @@ public class MainActivity extends AppCompatActivity implements OnRegisterSuccess
         this.treeId = treeId;
 
 
+    }
+
+    @Override
+    public void sendCoins(int coins) {
+        this.currentCoins = coins;
     }
 }
 
