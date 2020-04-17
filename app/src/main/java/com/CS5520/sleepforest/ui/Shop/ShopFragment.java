@@ -98,6 +98,7 @@ public class ShopFragment extends Fragment {
                     return ;
                 }
                 popUpContack();
+                shopListner.sendToHome(5);
                 Toast.makeText(getContext(),"congratulation! the tree5 successfully Purchased",Toast.LENGTH_SHORT).show();
                 coins.setText(Integer.parseInt(coins.getText().toString()) - 10000 + "");
             }
