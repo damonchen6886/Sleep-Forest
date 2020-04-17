@@ -38,7 +38,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class HomeFragment extends Fragment implements SensorEventListener{
     /////////
     /////////
-   // final int SLEEPHOUR = 9;
+    // final int SLEEPHOUR = 9;
     private CoinsListener coinsListener;
     private int imageSrc;
     private TextView textView;
@@ -100,7 +100,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 //                             ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
-       // View root = inflater.inflate(R.layout.fragment_home, container, false);
+        // View root = inflater.inflate(R.layout.fragment_home, container, false);
         textView = getView().findViewById(R.id.text_home);
         if (imageSrc != R.drawable.main_page2){
             textView.setText("Tree is growing while phone is locked");
@@ -122,6 +122,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
             public void onClick(View v) {
 
 
+
                     homeViewModel.getCoins().observe(getViewLifecycleOwner(), new Observer<List<Shop>>() {
                                 @Override
                                 public void onChanged(List<Shop> shops) {
@@ -136,23 +137,23 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                                     }
 
                                 }
-                            }
+                            });
 
                             // TODO: get coins.
 
                             // TODO: reset state
 
-            }
-        });
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+
+                if (growing && sensorDetedtedTime != null){
+                    // TODO: get coins.
+                    // TODO: reset state
+                    reset();
+                }
 
             }
         });
 
-       // screenReceiver = new ScreenReceiver();
+        // screenReceiver = new ScreenReceiver();
         IntentFilter screenStatusIF = new IntentFilter();
         //screenStatusIF.addAction(Intent.ACTION_SCREEN_ON);
         screenStatusIF.addAction(Intent.ACTION_SCREEN_OFF);
@@ -179,19 +180,30 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         ///////////////////////////
         Button testDatabase = getView().findViewById(R.id.testCoin);
         final TextView displaycoin = getView().findViewById(R.id.getCoins);
+
+        homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
+            @Override
+            public void onChanged(@Nullable List<Shop> s) {
+                if (s.size() >0){
+                    displaycoin.setText(s.get(0).getTotalCoins()+"");
+                    coinsListener.sendCoins(s.get(0).getTotalCoins());}
+
+            }
+        });
         testDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // int coin = 30;
+                // int coin = 30;
                 homeViewModel.deleteCoin();
                 homeViewModel.insertCoin(new Shop(1, 3000));
+
 
                 homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
                     @Override
                     public void onChanged(@Nullable List<Shop> s) {
                         if (s.size() >0){
-                        displaycoin.setText(s.get(0).getTotalCoins()+"");
-                        coinsListener.sendCoins(s.get(0).getTotalCoins());}
+                            displaycoin.setText(s.get(0).getTotalCoins()+"");
+                            coinsListener.sendCoins(s.get(0).getTotalCoins());}
 
                     }
                 });
@@ -255,12 +267,13 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 //                displaycoin.setText();
 //            }
 //        });
-      //  return root;
+        //  return root;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        if (growing)
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
         Log.e(TAG, "nResume");
     }
@@ -275,7 +288,9 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
-          //  Log.e(TAG, "onSensorChanged");
+
+            Log.e(TAG, "onSensorChanged");
+
             mGravity = event.values.clone();
             // Shake detection
             float x = mGravity[0];
@@ -365,7 +380,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
     public void setImageSrc(int imageSrc) {
         this.imageSrc = imageSrc;
-       // Log.e("image",this.imageSrc + "");
+        // Log.e("image",this.imageSrc + "");
     }
 
     private int[] getTimeDiff(Date current, Date bedtime){
@@ -389,14 +404,27 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         return 10;
     }
 
-//    public void insertShop(Shop shop){
+    //    public void insertShop(Shop shop){
 //        shopRepository = new ShopRepository(get);
 //        shopRepository.insertShop(shop);
 //    }
-@SuppressWarnings("deprecation")
+    @SuppressWarnings("deprecation")
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         coinsListener = (CoinsListener)activity;
+    }
+
+    private void reset(){
+        bedtime = null;
+        sensorDetedtedTime = null;
+        setGrowing(false);
+        setTreeId(0);
+
+        mainImage.setImageResource(R.drawable.main_page2);
+        textView.setText("Please go to setting to \nset your time to go to bed");
+
+
+
     }
 }
