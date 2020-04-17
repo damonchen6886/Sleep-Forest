@@ -121,7 +121,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
             @Override
             public void onClick(View v) {
 
-                if (growing && sensorDetedtedTime != null) {
+
                     homeViewModel.getCoins().observe(getViewLifecycleOwner(), new Observer<List<Shop>>() {
                                 @Override
                                 public void onChanged(List<Shop> shops) {
@@ -141,7 +141,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                             // TODO: get coins.
 
                             // TODO: reset state
-                }
+
             }
         });
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
