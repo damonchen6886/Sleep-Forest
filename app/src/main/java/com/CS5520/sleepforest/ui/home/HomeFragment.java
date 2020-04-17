@@ -43,7 +43,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class HomeFragment extends Fragment implements SensorEventListener{
     /////////
     /////////
-   // final int SLEEPHOUR = 9;
+    // final int SLEEPHOUR = 9;
     private CoinsListener coinsListener;
     private int imageSrc;
     private TextView textView;
@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 //                             ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
-       // View root = inflater.inflate(R.layout.fragment_home, container, false);
+        // View root = inflater.inflate(R.layout.fragment_home, container, false);
         textView = getView().findViewById(R.id.text_home);
         if (imageSrc != R.drawable.main_page2){
             textView.setText("Tree is growing while phone is locked");
@@ -132,7 +132,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
             }
         });
 
-       // screenReceiver = new ScreenReceiver();
+        // screenReceiver = new ScreenReceiver();
         IntentFilter screenStatusIF = new IntentFilter();
         //screenStatusIF.addAction(Intent.ACTION_SCREEN_ON);
         screenStatusIF.addAction(Intent.ACTION_SCREEN_OFF);
@@ -172,19 +172,20 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         testDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // int coin = 30;
+                // int coin = 30;
                 homeViewModel.deleteCoin();
                 homeViewModel.insertCoin(new Shop(1, 3000));
 
-//                homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
-//                    @Override
-//                    public void onChanged(@Nullable List<Shop> s) {
-//                        if (s.size() >0){
-//                        displaycoin.setText(s.get(0).getTotalCoins()+"");
-//                        coinsListener.sendCoins(s.get(0).getTotalCoins());}
-//
-//                    }
-//                });
+
+                homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
+                    @Override
+                    public void onChanged(@Nullable List<Shop> s) {
+                        if (s.size() >0){
+                            displaycoin.setText(s.get(0).getTotalCoins()+"");
+                            coinsListener.sendCoins(s.get(0).getTotalCoins());}
+
+                    }
+                });
             }
         });
 
@@ -194,7 +195,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 //                displaycoin.setText();
 //            }
 //        });
-      //  return root;
+        //  return root;
     }
 
     @Override
@@ -215,7 +216,9 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
+
             Log.e(TAG, "onSensorChanged");
+
             mGravity = event.values.clone();
             // Shake detection
             float x = mGravity[0];
@@ -305,7 +308,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
     public void setImageSrc(int imageSrc) {
         this.imageSrc = imageSrc;
-       // Log.e("image",this.imageSrc + "");
+        // Log.e("image",this.imageSrc + "");
     }
 
     private int[] getTimeDiff(Date current, Date bedtime){
@@ -329,11 +332,11 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         return 10;
     }
 
-//    public void insertShop(Shop shop){
+    //    public void insertShop(Shop shop){
 //        shopRepository = new ShopRepository(get);
 //        shopRepository.insertShop(shop);
 //    }
-@SuppressWarnings("deprecation")
+    @SuppressWarnings("deprecation")
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
