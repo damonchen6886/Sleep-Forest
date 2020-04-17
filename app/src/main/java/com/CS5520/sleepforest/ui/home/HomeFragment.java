@@ -1,5 +1,6 @@
 package com.CS5520.sleepforest.ui.home;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,6 +24,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.CS5520.sleepforest.CoinsListener;
 import com.CS5520.sleepforest.MovementListener;
 import com.CS5520.sleepforest.R;
 import com.CS5520.sleepforest.ScreenReceiver;
@@ -42,6 +44,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     /////////
     /////////
    // final int SLEEPHOUR = 9;
+    private CoinsListener coinsListener;
     private int imageSrc;
     private TextView textView;
     private HomeViewModel homeViewModel;
@@ -173,7 +176,8 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                     @Override
                     public void onChanged(@Nullable List<Shop> s) {
                         if (s.size() >0){
-                        displaycoin.setText(s.get(0).getTotalCoins()+"");}
+                        displaycoin.setText(s.get(0).getTotalCoins()+"");
+                        coinsListener.sendCoins(s.get(0).getTotalCoins());}
 
                     }
                 });
@@ -206,7 +210,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
-            Log.e(TAG, "onSensorChanged");
+          //  Log.e(TAG, "onSensorChanged");
             mGravity = event.values.clone();
             // Shake detection
             float x = mGravity[0];
@@ -324,4 +328,10 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 //        shopRepository = new ShopRepository(get);
 //        shopRepository.insertShop(shop);
 //    }
+@SuppressWarnings("deprecation")
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        coinsListener = (CoinsListener)activity;
+    }
 }

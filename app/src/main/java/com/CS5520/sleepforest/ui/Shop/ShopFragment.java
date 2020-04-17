@@ -18,6 +18,8 @@ import androidx.lifecycle.ViewModelProviders;
 import com.CS5520.sleepforest.R;
 import com.CS5520.sleepforest.ShopListner;
 
+import org.w3c.dom.Text;
+
 public class ShopFragment extends Fragment {
 
     private ShopViewModel shopViewModel;
@@ -35,6 +37,8 @@ public class ShopFragment extends Fragment {
         Button shopTree3 = root.findViewById(R.id.tree3);
         Button shopTree4 = root.findViewById(R.id.tree4);
         Button shopTree5 = root.findViewById(R.id.tree5);
+        TextView coins = root.findViewById(R.id.currentCoin);
+        coins.setText(getArguments().getInt("coins") + "");
         shopTree1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
