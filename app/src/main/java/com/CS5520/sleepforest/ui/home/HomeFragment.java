@@ -32,6 +32,7 @@ import com.CS5520.sleepforest.Time;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -80,31 +81,33 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     private float mAccelCurrent;
     private float mAccelLast;
     // private MovementListener sensorEventListener;
-
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_home, container, false);
+    }
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         if (getArguments() != null) {
             imageSrc = getArguments().getInt("image");
         }
         else {
             imageSrc = R.drawable.main_page2;
         }
-    }
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+
+//    public View onCreateView(@NonNull LayoutInflater inflater,
+//                             ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        textView = root.findViewById(R.id.text_home);
+       // View root = inflater.inflate(R.layout.fragment_home, container, false);
+        textView = getView().findViewById(R.id.text_home);
         if (imageSrc != R.drawable.main_page2){
             textView.setText("Tree is growing while phone is locked");
         }else{
             textView.setText("Please go to setting to \nset your time to go to bed");
         }
-        mainImage = root.findViewById(R.id.imageViewMain);
+        mainImage = getView().findViewById(R.id.imageViewMain);
 
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
 //            @Override
@@ -157,25 +160,33 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         Log.e("tree", this.treeId + "");
 
         ///////////////////////////
-        Button testDatabase = root.findViewById(R.id.testCoin);
-        final TextView displaycoin = root.findViewById(R.id.getCoins);
+        Button testDatabase = getView().findViewById(R.id.testCoin);
+        final TextView displaycoin = getView().findViewById(R.id.getCoins);
         testDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                // int coin = 30;
                 homeViewModel.deleteCoin();
-                homeViewModel.insertCoin(new Shop(30));
+                homeViewModel.insertCoin(new Shop(1, 30));
 
+                homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
+                    @Override
+                    public void onChanged(@Nullable List<Shop> s) {
+                        if (s.size() >0){
+                        displaycoin.setText(s.get(0).getTotalCoins()+"");}
+
+                    }
+                });
             }
         });
-        displaycoin.setText(homeViewModel.getCoins());
+
 //        homeViewModel.getText().observe(this, new Observer<String>() {
 //            @Override
 //            public void onChanged(String s) {
 //                displaycoin.setText();
 //            }
 //        });
-        return root;
+      //  return root;
     }
 
     @Override
