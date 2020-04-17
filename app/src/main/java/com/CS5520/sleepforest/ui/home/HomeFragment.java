@@ -127,6 +127,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                 if (growing && sensorDetedtedTime != null){
                     // TODO: get coins.
                     // TODO: reset state
+                    reset();
                 }
             }
         });
@@ -158,6 +159,16 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         ///////////////////////////
         Button testDatabase = getView().findViewById(R.id.testCoin);
         final TextView displaycoin = getView().findViewById(R.id.getCoins);
+
+        homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
+            @Override
+            public void onChanged(@Nullable List<Shop> s) {
+                if (s.size() >0){
+                    displaycoin.setText(s.get(0).getTotalCoins()+"");
+                    coinsListener.sendCoins(s.get(0).getTotalCoins());}
+
+            }
+        });
         testDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,15 +176,15 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                 homeViewModel.deleteCoin();
                 homeViewModel.insertCoin(new Shop(1, 3000));
 
-                homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
-                    @Override
-                    public void onChanged(@Nullable List<Shop> s) {
-                        if (s.size() >0){
-                        displaycoin.setText(s.get(0).getTotalCoins()+"");
-                        coinsListener.sendCoins(s.get(0).getTotalCoins());}
-
-                    }
-                });
+//                homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
+//                    @Override
+//                    public void onChanged(@Nullable List<Shop> s) {
+//                        if (s.size() >0){
+//                        displaycoin.setText(s.get(0).getTotalCoins()+"");
+//                        coinsListener.sendCoins(s.get(0).getTotalCoins());}
+//
+//                    }
+//                });
             }
         });
 
@@ -189,6 +200,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     @Override
     public void onResume() {
         super.onResume();
+        if (growing)
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
         Log.e(TAG, "nResume");
     }
@@ -203,7 +215,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
-          //  Log.e(TAG, "onSensorChanged");
+            Log.e(TAG, "onSensorChanged");
             mGravity = event.values.clone();
             // Shake detection
             float x = mGravity[0];
@@ -326,5 +338,18 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         coinsListener = (CoinsListener)activity;
+    }
+
+    private void reset(){
+        bedtime = null;
+        sensorDetedtedTime = null;
+        setGrowing(false);
+        setTreeId(0);
+
+        mainImage.setImageResource(R.drawable.main_page2);
+        textView.setText("Please go to setting to \nset your time to go to bed");
+
+
+
     }
 }
