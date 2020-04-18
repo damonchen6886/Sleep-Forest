@@ -145,6 +145,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                 }
 
                 if(imageSrc == R.drawable.main_fail){
+                    ((MainActivity)getActivity()).reset();
                     reset();
                 }
 
@@ -223,6 +224,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                 Log.e(TAG, "SENSOR_DETEDTED_TIME");
                 Log.e("time diffh", diffh + "");
                 Log.e("time diffm", diffm + "");
+                if(diffh * 60 + diffm > 0){
 
                 textView.setText("tap the tree to get coins");
                 switch(treeId){
@@ -255,7 +257,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
 
 
-                }
+                }}
                 Log.e(TAG, "HANDPHONE_SHAKE: " + sensorDetedtedTime.toString());
 
             }
@@ -363,6 +365,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         bedtime = null;
         sensorDetedtedTime = null;
         setGrowing(false);
+        growingFinish = false;
 //        setGrowingFinish(false);
         setTreeId(0);
 
