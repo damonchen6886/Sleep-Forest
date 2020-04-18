@@ -35,9 +35,9 @@ public class SlideshowFragment extends Fragment {
     // music list
     ListView musicList;
     final ArrayList<Music> listContent = new ArrayList<>();
-    final int[] ids = {R.raw.wn01_10min, R.raw.wn01_60min,
+    final int[] ids = {R.raw.wn01_10min,
             R.raw.wn02_10min, R.raw.wn02_60min,
-            R.raw.wn03_10min, R.raw.wn03_60min};
+            R.raw.wn03_10min};
 
     // music player
     Button playBtn;
@@ -55,11 +55,9 @@ public class SlideshowFragment extends Fragment {
         musicList = (ListView)root.findViewById(R.id.musicList);
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, listContent);
         listContent.add(new Music("waves", "10 minutes"));
-        listContent.add(new Music("waves", "60 minutes"));
         listContent.add(new Music("dryer ", " 10 minutes"));
         listContent.add(new Music("dryer ", " 60 minutes"));
         listContent.add(new Music("heater", "10 minutes"));
-        listContent.add(new Music("heater", "60 minutes"));
         ArrayAdapter<Music> adapter = new MusicAdapter(getActivity().getApplicationContext(), 0, listContent);
         musicList.setAdapter(adapter);
         currMusic = root.findViewById(R.id.currMusic);
