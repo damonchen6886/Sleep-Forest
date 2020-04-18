@@ -65,7 +65,8 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                 return;
             }
             setGrowing(false);
-            mainImage.setImageResource(R.drawable.main_fail);
+            imageSrc = R.drawable.main_fail;
+            mainImage.setImageResource(imageSrc);
         }
     };
     private Date bedtime;
@@ -142,6 +143,11 @@ public class HomeFragment extends Fragment implements SensorEventListener{
    //                 homeViewModel.updateCoin(calculateCoins());
                     reset();
                 }
+
+                if(imageSrc == R.drawable.main_fail){
+                    reset();
+                }
+
 
 
 
@@ -330,37 +336,37 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                 Log.e(TAG, "SENSOR_DETEDTED_TIME");
                 Log.e("time diffh", diffh + "");
                 Log.e("time diffm", diffm + "");
-                if (growing && diffh >= 6){
-                    textView.setText("tap the tree to get coins");
-                    switch(treeId){
-                        case 0:
-                            setGrowingFinish(true);
-                            setGrowing(false);
-                            break;
-                        case 1:
-                            mainImage.setImageResource(R.drawable.main_shop1);
-                            setGrowingFinish(true);
-                            setGrowing(false);
-                            break;
-                        case 2:
-                            mainImage.setImageResource(R.drawable.main_shop2);
-                            setGrowingFinish(true);
-                            setGrowing(false);
-                            break;
-                        case 3:
-                            mainImage.setImageResource(R.drawable.main_shop3);
-                            setGrowingFinish(true);
-                            setGrowing(false);
-                            break;
-                        case 4:
-                            mainImage.setImageResource(R.drawable.main_shop4);
-                            setGrowingFinish(true);
-                            setGrowing(false);
-                            break;
-                        default:
+
+                textView.setText("tap the tree to get coins");
+                switch(treeId){
+                    case 0:
+                        setGrowingFinish(true);
+                        setGrowing(false);
+                        break;
+                    case 1:
+                         mainImage.setImageResource(R.drawable.main_shop1);
+                         setGrowingFinish(true);
+                         setGrowing(false);
+                         break;
+                    case 2:
+                        mainImage.setImageResource(R.drawable.main_shop2);
+                        setGrowingFinish(true);
+                        setGrowing(false);
+                        break;
+                    case 3:
+                        mainImage.setImageResource(R.drawable.main_shop3);
+                        setGrowingFinish(true);
+                        setGrowing(false);
+                        break;
+                    case 4:
+                        mainImage.setImageResource(R.drawable.main_shop4);
+                        setGrowingFinish(true);
+                        setGrowing(false);
+                        break;
+                    default:
 
 
-                    }
+
 
                 }
                 Log.e(TAG, "HANDPHONE_SHAKE: " + sensorDetedtedTime.toString());
@@ -423,7 +429,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         switch (treeId){
             case 1:
                rate = 600;
-                break;
+               break;
 
             case 2:
                 rate =1100;
@@ -440,15 +446,23 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
         int[] diff = getTimeDiff(sensorDetedtedTime, getBedtime());
         int length = diff[0]*60 +diff[1];
+        System.out.println(length);
+        System.out.println(diff[0]);
+        System.out.println(diff[1]);
         if( length>450 && length <510){
             return 1 * rate;
         }
+
         if( (length > 420 && length< 450) ||(length >510 && length < 540 )){
             return (int) (0.75 * rate);
         }
-        else{
+
+        if((length>0 && length <= 420) ||(length >= 540)){
             return (int) (rate* 0.3);
         }
+
+        return 0;
+
     }
 
     //    public void insertShop(Shop shop){
