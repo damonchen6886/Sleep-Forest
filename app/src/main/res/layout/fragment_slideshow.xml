@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center_horizontal"
-    android:background="#FFFFFF">
+    android:background="#CDD6CB">
 
     <ListView
         android:id="@+id/musicList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="#CDD6CB"
         android:divider="@color/grayLine"
         android:dividerHeight="1dp"></ListView>
     <RelativeLayout
