@@ -47,7 +47,7 @@ public class ShopFragment extends Fragment {
         final TextView coins = root.findViewById(R.id.currentCoin);
 
        // coins.setText(getArguments().getInt("coins") + "");
-//        final int current = Integer.parseInt(coins.getText().toString());
+
 //        shopViewModel.deleteCoin();
 //        shopViewModel.insertCoin(new Shop(1, 8000));
         shopViewModel.updateCoin(getArguments().getInt("coins"));
@@ -64,61 +64,61 @@ public class ShopFragment extends Fragment {
             else{
                 shopViewModel.insertCoin(new Shop(1, 0));
                 }}});
-
+       // final int current = shopViewModel.getCoins().getValue().get(0).getTotalCoins();
         shopTree1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (current < 600){
-//                    Toast.makeText(getContext(),":( Need more coins",Toast.LENGTH_SHORT).show();
-//                    return ;
-//                }
-                //shopListner.sendToHome(1);
+                if (shopViewModel.getCoins().getValue().get(0).getTotalCoins() < 600){
+                    Toast.makeText(getContext(),":( Need more coins",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
+                shopListner.sendToHome(1);
                 shopTree1.setClickable(false);
                 Toast.makeText(getContext(),"congratulation! the tree1 successfully Purchased",Toast.LENGTH_SHORT).show();
-               // coins.setText(Integer.parseInt(coins.getText().toString()) - 600 + "");
+                coins.setText(Integer.parseInt(coins.getText().toString()) - 600 + "");
                 shopViewModel.updateCoin(-600);
             }
         });
         shopTree2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (current < 800){
-//                    Toast.makeText(getContext(),":( Need more coins",Toast.LENGTH_SHORT).show();
-//                    return ;
-//                }
+                if (shopViewModel.getCoins().getValue().get(0).getTotalCoins()< 800){
+                    Toast.makeText(getContext(),":( Need more coins",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 shopListner.sendToHome(2);
                 shopTree2.setClickable(false);
                 Toast.makeText(getContext(),"congratulations! the tree2 successfully Purchased",Toast.LENGTH_SHORT).show();
-                //coins.setText(Integer.parseInt(coins.getText().toString()) - 800 + "");
+                coins.setText(Integer.parseInt(coins.getText().toString()) - 800 + "");
                 shopViewModel.updateCoin(-800);
             }
         });
         shopTree3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (current < 1200){
-//                    Toast.makeText(getContext(),":( Need more coins",Toast.LENGTH_SHORT).show();
-//                    return ;
-//                }
+                if (shopViewModel.getCoins().getValue().get(0).getTotalCoins() < 1200){
+                    Toast.makeText(getContext(),":( Need more coins",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 shopListner.sendToHome(3);
                 shopTree3.setClickable(false);
                 Toast.makeText(getContext(),"congratulation! the tree3 successfully Purchased",Toast.LENGTH_SHORT).show();
-                //coins.setText(Integer.parseInt(coins.getText().toString()) - 1200 + "");
+                coins.setText(Integer.parseInt(coins.getText().toString()) - 1200 + "");
                 shopViewModel.updateCoin(-1200);
             }
         });
         shopTree4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (current < 2000){
-//                    Toast.makeText(getContext(),":( Need more coins",Toast.LENGTH_SHORT).show();
-//                    return ;
-//                }
+                if (shopViewModel.getCoins().getValue().get(0).getTotalCoins() < 2000){
+                    Toast.makeText(getContext(),":( Need more coins",Toast.LENGTH_SHORT).show();
+                    return ;
+               }
 
                 shopListner.sendToHome(4);
                 shopTree4.setClickable(false);
                 Toast.makeText(getContext(),"congratulation! the tree4 successfully Purchased",Toast.LENGTH_SHORT).show();
-              //  coins.setText(Integer.parseInt(coins.getText().toString()) - 2000 + "");
+                coins.setText(Integer.parseInt(coins.getText().toString()) - 2000 + "");
                 shopViewModel.updateCoin(-2000);
             }
         });
@@ -126,13 +126,13 @@ public class ShopFragment extends Fragment {
         shopTree5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (current < 10000){
-//                    Toast.makeText(getContext(),":( Need more coins",Toast.LENGTH_SHORT).show();
-//                    return ;
-//                }
+                if (shopViewModel.getCoins().getValue().get(0).getTotalCoins()< 10000){
+                    Toast.makeText(getContext(),":( Need more coins",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 popUpContack();
-                shopListner.sendToHome(5);
-                Toast.makeText(getContext(),"congratulation! the tree5 successfully Purchased",Toast.LENGTH_SHORT).show();
+              shopListner.sendToHome(5);
+              Toast.makeText(getContext(),"congratulation! the tree5 successfully Purchased",Toast.LENGTH_SHORT).show();
                // coins.setText(Integer.parseInt(coins.getText().toString()) - 10000 + "");
                 shopViewModel.updateCoin(-10000);
             }
