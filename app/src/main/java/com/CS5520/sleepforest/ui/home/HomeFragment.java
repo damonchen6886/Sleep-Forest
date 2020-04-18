@@ -327,6 +327,9 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                 int[] diff = getTimeDiff(sensorDetedtedTime, getBedtime());
                 int diffh = diff[0];
                 int diffm = diff[1];
+                if(diffh * 60 + diffm < 0){
+                    sensorDetedtedTime = null;
+                }
                 Log.e(TAG, "SENSOR_DETEDTED_TIME");
                 Log.e("time diffh", diffh + "");
                 Log.e("time diffm", diffm + "");
@@ -363,7 +366,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                     }
 
                 }
-                Log.e(TAG, "HANDPHONE_SHAKE: " + sensorDetedtedTime.toString());
+                Log.e(TAG, "HANDPHONE_SHAKE: " + (sensorDetedtedTime==null?"":sensorDetedtedTime.toString()));
 
             }
         }
@@ -446,9 +449,10 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         if( (length > 420 && length< 450) ||(length >510 && length < 540 )){
             return (int) (0.75 * rate);
         }
-        else{
+        if((length>0 && length <= 420) ||(length >= 540)){
             return (int) (rate* 0.3);
         }
+        return 0;
     }
 
     //    public void insertShop(Shop shop){
