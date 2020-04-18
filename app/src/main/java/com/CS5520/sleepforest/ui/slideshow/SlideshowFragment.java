@@ -109,34 +109,6 @@ public class SlideshowFragment extends Fragment {
                 }
             }
         });
-//        elapsedTimeLabel = (TextView)root.findViewById(R.id.elapsedTimeLabel);
-//        remainingTimeLabel = (TextView)root.findViewById(R.id.remainingTimeLabel);
-
-        // position
-//        positionBar = (SeekBar)root.findViewById(R.id.positionBar);
-//        positionBar.setMax(totalTime);
-//        positionBar.setOnSeekBarChangeListener(
-//                new SeekBar.OnSeekBarChangeListener() {
-//                    @Override
-//                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                        if (fromUser) {
-//                            mp.seekTo(progress);
-//                            positionBar.setProgress(progress);
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onStopTrackingTouch(SeekBar seekBar) {
-//
-//                    }
-//                }
-//        );
 
         // volume
         volumeBar = (SeekBar)root.findViewById(R.id.volumnBar);
@@ -160,63 +132,19 @@ public class SlideshowFragment extends Fragment {
                 }
         );
 
-//        new Thread(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                while(mp != null) {
-//                    try {
-//                        Message msg = new Message();
-//                        msg.what = mp.getCurrentPosition();
-//                        handler.sendMessage(msg);
-//                        Thread.sleep(1000);
-//                    } catch (InterruptedException e) {}
-//                }
-//            }
-//        }).start();
-
-
 
         return root;
     }
 
-//    public Handler handler = new Handler() {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            int currPosition = msg.what;
-//            positionBar.setProgress(currPosition);
-//
-//            String elapsedTime = createTimeLabel(currPosition);
-//            elapsedTimeLabel.setText(elapsedTime);
-//
-//            String remainingTime = createTimeLabel(totalTime - currPosition);
-//            remainingTimeLabel.setText("-" + remainingTime);
-//        }
-//    };
-
-
-
-//    public String createTimeLabel(int time) {
-//        String timeLabel = "";
-//        int min = time / 1000 / 60;
-//        int sec = time / 1000 % 60;
-//
-//        timeLabel = min + ":";
-//        if (sec < 0) sec = 0;
-//        if (sec < 10) timeLabel += "0";
-//        timeLabel += sec;
-//        return timeLabel;
-//    }
-
     @Override
     public void onPause() {
         super.onPause();
-        mp.stop();
+        if (mp != null) mp.stop();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mp.stop();
+        if (mp != null) mp.stop();
     }
 }
