@@ -71,6 +71,21 @@ public class ShopRepository {
         }
     }
 
+    private static class UpdateAsyncTask extends AsyncTask<Integer, Void, Void> {
+
+        private ShopDao asyncTaskDao;
+
+       UpdateAsyncTask(ShopDao dao) {
+            asyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            asyncTaskDao.updateCoins(integers[0]);
+            return null;
+        }
+
+    }
     public void insertShop(Shop shop){
         ShopRepository.InsertAsyncTask task = new ShopRepository.InsertAsyncTask(shopDao);
         task.execute(shop);
@@ -82,6 +97,14 @@ public class ShopRepository {
         task.execute();
 
     }
+
+    public void updateShop(int c){
+        ShopRepository.UpdateAsyncTask task = new ShopRepository.UpdateAsyncTask(shopDao);
+        task.execute(c);
+
+    }
+
+
 
     public LiveData<List<Shop>> getShops() {
         return shops;

@@ -196,55 +196,75 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                 homeViewModel.insertCoin(new Shop(1, 3000));
 
 
-                homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
-                    @Override
-                    public void onChanged(@Nullable List<Shop> s) {
-                        if (s.size() >0){
-                            displaycoin.setText(s.get(0).getTotalCoins()+"");
-                            coinsListener.sendCoins(s.get(0).getTotalCoins());}
-
-                    }
-                });
+//                homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
+//                    @Override
+//                    public void onChanged(@Nullable List<Shop> s) {
+//                        if (s.size() >0){
+//                            displaycoin.setText(s.get(0).getTotalCoins()+"");
+//                            coinsListener.sendCoins(s.get(0).getTotalCoins());}
+//
+//                    }
+//                });
             }
         });
 
 
-
-        final int current = Integer.parseInt(currentCoin.getText().toString());
+        currentCoin = getView().findViewById(R.id.currentCoin);
+       // final int current = currentCoin.getText().toString().equals("")?0:Integer.parseInt(currentCoin.getText().toString());
         switch (treeId){
             case 1:
-                homeViewModel.deleteCoin();
-                homeViewModel.insertCoin(new Shop(1,current -600));
+               homeViewModel.updateCoin(-600);
                 break;
+
             case 2:
                 homeViewModel.deleteCoin();
-                homeViewModel.insertCoin(new Shop(1,current -800));
+                homeViewModel.updateCoin(-800);
                 break;
+
             case 3:
-                homeViewModel.deleteCoin();
-                homeViewModel.insertCoin(new Shop(1,current -1200));
+                homeViewModel.updateCoin(-1200);
                 break;
             case 4:
-                homeViewModel.deleteCoin();
-                homeViewModel.insertCoin(new Shop(1,current -2000));
+                homeViewModel.updateCoin(-2000);
                 break;
             case 5:
-                homeViewModel.deleteCoin();
-                homeViewModel.insertCoin(new Shop(1,current -10000));
+                homeViewModel.updateCoin(-10000);
+
                 break;
         }
         homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
             @Override
             public void onChanged(@Nullable List<Shop> s) {
                 if (s.size() >0){
-                    currentCoin.setText(s.get(0).getTotalCoins() +"");
-                    coinsListener.sendCoins(s.get(0).getTotalCoins());
-//                    if(treeId == 0){
-//                        displaycoin.setText(s.get(0).getTotalCoins()+"");
+
+
+                    currentCoin.setText(s.get(0).getTotalCoins() + "");
+
+
+
+//                    if(treeId ==2){
+//                        int databaseCurrentCoin = s.get(0).getTotalCoins() -800;
+//                        homeViewModel.deleteCoin();
+//                        homeViewModel.insertCoin(new Shop(1, databaseCurrentCoin));
+//                        currentCoin.setText(databaseCurrentCoin +"");
 //                        coinsListener.sendCoins(s.get(0).getTotalCoins());
 //                    }
-//                    if(treeId ==1){
-//                        int databaseCurrentCoin = s.get(0).getTotalCoins() -600;
+//                    if(treeId ==3){
+//                        int databaseCurrentCoin = s.get(0).getTotalCoins() -1200;
+//                        homeViewModel.deleteCoin();
+//                        homeViewModel.insertCoin(new Shop(1, databaseCurrentCoin));
+//                        currentCoin.setText(databaseCurrentCoin +"");
+//                        coinsListener.sendCoins(s.get(0).getTotalCoins());
+//                    }
+//                    if(treeId ==4){
+//                        int databaseCurrentCoin = s.get(0).getTotalCoins() -2000;
+//                        homeViewModel.deleteCoin();
+//                        homeViewModel.insertCoin(new Shop(1, databaseCurrentCoin));
+//                        currentCoin.setText(databaseCurrentCoin +"");
+//                        coinsListener.sendCoins(s.get(0).getTotalCoins());
+//                    }
+//                    if(treeId ==5){
+//                        int databaseCurrentCoin = s.get(0).getTotalCoins() -10000;
 //                        homeViewModel.deleteCoin();
 //                        homeViewModel.insertCoin(new Shop(1, databaseCurrentCoin));
 //                        currentCoin.setText(databaseCurrentCoin +"");
