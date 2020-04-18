@@ -28,6 +28,7 @@ import com.CS5520.sleepforest.MainActivity;
 import com.CS5520.sleepforest.R;
 import com.CS5520.sleepforest.Shop;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -45,6 +46,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     private int imageSrc;
     private int coins;
     private TextView textView;
+    private TextView bedtimeNotice;
     private HomeViewModel homeViewModel;
     private BroadcastReceiver screenOffReceiver = new BroadcastReceiver() {
         @Override
@@ -98,13 +100,6 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         else {
             imageSrc = R.drawable.main_page2;
         }
-  //      currentCoin = getView().findViewById(R.id.currentCoin);
-//        currentCoin.setText("0");
-
-
-
-//    public View onCreateView(@NonNull LayoutInflater inflater,
-//                             ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         // View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -116,14 +111,6 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         }
         mainImage = getView().findViewById(R.id.imageViewMain);
         final TextView displaycoin = getView().findViewById(R.id.getCoins);
-
-//        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//
-//            }
-//        });
 
         mainImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,11 +143,20 @@ public class HomeFragment extends Fragment implements SensorEventListener{
             }
         });
 
-        // screenReceiver = new ScreenReceiver();
+
         IntentFilter screenStatusIF = new IntentFilter();
-        //screenStatusIF.addAction(Intent.ACTION_SCREEN_ON);
         screenStatusIF.addAction(Intent.ACTION_SCREEN_OFF);
         getActivity().registerReceiver(screenOffReceiver, screenStatusIF);
+
+        // bedtime notice
+        bedtimeNotice = (TextView) getView().findViewById(R.id.bedtimeNotice);
+        if (bedtime != null) {
+            String pattern = "HH : mm";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+            //String date = simpleDateFormat.format(new Date());
+            bedtimeNotice.setText("Your bedtime is set to " + simpleDateFormat.format(this.bedtime));
+        }
 
         // accelerometer sensor
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
