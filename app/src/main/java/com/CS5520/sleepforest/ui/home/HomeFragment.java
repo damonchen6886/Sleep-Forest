@@ -39,6 +39,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     /////////
     /////////
     // final int SLEEPHOUR = 9;
+    private int rate = 100;
     private CoinsListener coinsListener;
     private int imageSrc;
     private TextView textView;
@@ -196,18 +197,22 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         switch (treeId){
             case 1:
                homeViewModel.updateCoin(-600);
+               rate = 600;
                 break;
 
             case 2:
                 homeViewModel.deleteCoin();
                 homeViewModel.updateCoin(-800);
+                rate =1100;
                 break;
 
             case 3:
                 homeViewModel.updateCoin(-1200);
+                rate =1600;
                 break;
             case 4:
                 homeViewModel.updateCoin(-2000);
+                rate =2200;
                 break;
             case 5:
                 homeViewModel.updateCoin(-10000);
@@ -400,8 +405,18 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     }
 
     public int calculateCoins(){
-        // TODO int[] rate = {0,600,800,1200,2000,10000};
-        return 10;
+
+        int[] diff = getTimeDiff(sensorDetedtedTime, getBedtime());
+        int length = diff[0]*60 +diff[1];
+        if( length>450 && length <510){
+            return 1 * rate;
+        }
+        if( (length > 420 && length< 450) ||(length >510 && length < 540 )){
+            return (int) (0.75 * rate);
+        }
+        else{
+            return (int) (rate* 0.3);
+        }
     }
 
     //    public void insertShop(Shop shop){
