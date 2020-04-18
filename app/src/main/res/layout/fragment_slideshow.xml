@@ -77,7 +77,7 @@
                             android:src="@drawable/sound"/>
                         <SeekBar
                             android:id="@+id/volumnBar"
-                            android:layout_width="300dp"
+                            android:layout_width="200dp"
                             android:layout_height="wrap_content"
                             android:progress="50"
                             android:max="100" />
