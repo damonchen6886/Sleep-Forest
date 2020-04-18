@@ -96,8 +96,8 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         else {
             imageSrc = R.drawable.main_page2;
         }
-        currentCoin = getView().findViewById(R.id.currentCoin);
-        currentCoin.setText("0");
+  //      currentCoin = getView().findViewById(R.id.currentCoin);
+//        currentCoin.setText("0");
 
 
 
@@ -202,7 +202,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 //        });
 
 
-        currentCoin = getView().findViewById(R.id.currentCoin);
+       // currentCoin = getView().findViewById(R.id.currentCoin);
        // final int current = currentCoin.getText().toString().equals("")?0:Integer.parseInt(currentCoin.getText().toString());
 //        switch (treeId){
 //            case 1:
