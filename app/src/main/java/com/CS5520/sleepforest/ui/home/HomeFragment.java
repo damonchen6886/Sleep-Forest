@@ -123,30 +123,12 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         mainImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                if (growing && sensorDetedtedTime != null){
-                    int earnedcoin = calculateCoins();
-                    int current2 = Integer.parseInt(currentCoin.getText().toString());
-
-                    homeViewModel.deleteCoin();
-                    homeViewModel.insertCoin(new Shop(1, current2 + earnedcoin));
-                    homeViewModel.getCoins().observe(getViewLifecycleOwner(), new Observer<List<Shop>>() {
-                        @Override
-                        public void onChanged(List<Shop> shops) {
-
-                            if (shops.size() > 0) {
-
-                                currentCoin.setText(shops.get(0).getTotalCoins()  + "");
-                                coinsListener.sendCoins(shops.get(0).getTotalCoins());
-                            }
-
-                        }
-                    });
+                homeViewModel.updateCoin(calculateCoins());
+                reset();
                     // TODO: get coins.
                     // TODO: reset state
                     reset();
-                }
+
 
             }
         });
