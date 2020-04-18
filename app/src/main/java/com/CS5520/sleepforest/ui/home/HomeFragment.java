@@ -56,6 +56,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
             if ((diffh == 0 && diffm <=10) || (diffh <= 0 && diffm <=0)){
                 return;
             }
+            
             setGrowing(false);
             mainImage.setImageResource(R.drawable.main_fail);
         }
@@ -99,13 +100,6 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         }
         mainImage = root.findViewById(R.id.imageViewMain);
 
-//        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//
-//            }
-//        });
 
         mainImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,13 +109,6 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                     // TODO: get coins.
                     // TODO: reset state
                 }
-            }
-        });
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-
             }
         });
 
@@ -246,16 +233,6 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        if (imageSrc == 0) {
-//            mainImage.setImageResource(R.drawable.main_page2);
-//
-//        } else {
-//            mainImage.setImageResource(imageSrc);
-//        }
-//    }
 
     public void setImageSrc(int imageSrc) {
         this.imageSrc = imageSrc;
