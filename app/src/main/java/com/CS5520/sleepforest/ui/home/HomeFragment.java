@@ -128,7 +128,11 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                 reset();
                     // TODO: get coins.
                     // TODO: reset state
+                if (growing && sensorDetedtedTime != null){
+                    homeViewModel.updateCoin(calculateCoins());
                     reset();
+                }
+
 
 
             }
