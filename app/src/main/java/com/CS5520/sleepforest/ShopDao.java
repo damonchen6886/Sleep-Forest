@@ -18,7 +18,10 @@ interface ShopDao {
     @Query("SELECT * FROM shop where shopId = :id")
     List<Shop> findShop(int id);
 
-    @Query("UPDATE SHOP SET totalCoins  = (select totalCoins from  shop where shopId = 1) + :numbers WHERE shopId = 1")
+    @Query("UPDATE SHOP SET totalCoins  = " +
+            "CASE  WHEN (select totalCoins from  shop where shopId = 1) + :numbers  < 0 THEN (select totalCoins from  shop where shopId = 1)" +
+            "ELSE (select totalCoins from  shop where shopId = 1) + :numbers END " +
+            "WHERE shopId = 1")
     void updateCoins(int numbers);
 
 
