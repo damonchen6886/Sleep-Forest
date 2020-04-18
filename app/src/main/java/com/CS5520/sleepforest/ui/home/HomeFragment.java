@@ -42,6 +42,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     private int rate = 100;
     private CoinsListener coinsListener;
     private int imageSrc;
+    private int coins;
     private TextView textView;
     private TextView currentCoin ;
     private HomeViewModel homeViewModel;
@@ -112,6 +113,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
             textView.setText("Please go to setting to \nset your time to go to bed");
         }
         mainImage = getView().findViewById(R.id.imageViewMain);
+        final TextView displaycoin = getView().findViewById(R.id.getCoins);
 
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
 //            @Override
@@ -124,12 +126,16 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         mainImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                homeViewModel.updateCoin(calculateCoins());
+                coinsListener.sendCoins(calculateCoins());
+                displaycoin.setText(
+                        Integer.parseInt(displaycoin.getText().toString()) + calculateCoins()+ "");
+
+  //              homeViewModel.updateCoin(calculateCoins());
                 reset();
                     // TODO: get coins.
                     // TODO: reset state
                 if (growing && sensorDetedtedTime != null){
-                    homeViewModel.updateCoin(calculateCoins());
+   //                 homeViewModel.updateCoin(calculateCoins());
                     reset();
                 }
 
@@ -163,24 +169,24 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         Log.e("tree", this.treeId + "");
 
         ///////////////////////////
-        Button testDatabase = getView().findViewById(R.id.testCoin);
-        final TextView displaycoin = getView().findViewById(R.id.getCoins);
+//        Button testDatabase = getView().findViewById(R.id.testCoin);
 
-        homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
-            @Override
-            public void onChanged(@Nullable List<Shop> s) {
-                if (s.size() >0){
-                    displaycoin.setText(s.get(0).getTotalCoins()+"");
-                    coinsListener.sendCoins(s.get(0).getTotalCoins());}
-
-            }
-        });
-        testDatabase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // int coin = 30;
-                homeViewModel.deleteCoin();
-                homeViewModel.insertCoin(new Shop(1, 3000));
+//        homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
+//            @Override
+//            public void onChanged(@Nullable List<Shop> s) {
+//                if (s.size() >0){
+//                    displaycoin.setText(s.get(0).getTotalCoins()+"");
+//                    coinsListener.sendCoins(s.get(0).getTotalCoins());}
+//
+//            }
+//        });
+        displaycoin.setText(coins + "");
+//        testDatabase.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // int coin = 30;
+//                homeViewModel.deleteCoin();
+//                homeViewModel.insertCoin(new Shop(1, 3000));
 
 
 //                homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
@@ -191,44 +197,44 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 //                            coinsListener.sendCoins(s.get(0).getTotalCoins());}
 //
 //                    }
-//                });
-            }
-        });
+////                });
+//            }
+//        });
 
 
         currentCoin = getView().findViewById(R.id.currentCoin);
        // final int current = currentCoin.getText().toString().equals("")?0:Integer.parseInt(currentCoin.getText().toString());
-        switch (treeId){
-            case 1:
-               homeViewModel.updateCoin(-600);
-               rate = 600;
-                break;
-
-            case 2:
-                homeViewModel.updateCoin(-800);
-                rate =1100;
-                break;
-
-            case 3:
-                homeViewModel.updateCoin(-1200);
-                rate =1600;
-                break;
-            case 4:
-                homeViewModel.updateCoin(-2000);
-                rate =2200;
-                break;
-            case 5:
-                homeViewModel.updateCoin(-10000);
-
-                break;
-        }
-        homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
-            @Override
-            public void onChanged(@Nullable List<Shop> s) {
-                if (s.size() >0){
-
-
-                    currentCoin.setText(s.get(0).getTotalCoins() + "");
+//        switch (treeId){
+//            case 1:
+//               homeViewModel.updateCoin(-600);
+//               rate = 600;
+//                break;
+//
+//            case 2:
+//                homeViewModel.updateCoin(-800);
+//                rate =1100;
+//                break;
+//
+//            case 3:
+//                homeViewModel.updateCoin(-1200);
+//                rate =1600;
+//                break;
+//            case 4:
+//                homeViewModel.updateCoin(-2000);
+//                rate =2200;
+//                break;
+//            case 5:
+//                homeViewModel.updateCoin(-10000);
+//
+//                break;
+//        }
+//        homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
+//            @Override
+//            public void onChanged(@Nullable List<Shop> s) {
+//                if (s.size() >0){
+//
+//
+//                    currentCoin.setText(s.get(0).getTotalCoins() + "");
 
 
 
@@ -261,13 +267,13 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 //                        coinsListener.sendCoins(s.get(0).getTotalCoins());
 //                    }
 
-                }
-            }
+//                }
+//            }
+//
 
 
 
-
-        });
+ //       });
 
 //        homeViewModel.getText().observe(this, new Observer<String>() {
 //            @Override
@@ -408,18 +414,19 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     }
 
     public int calculateCoins(){
+        return 8000;
 
-        int[] diff = getTimeDiff(sensorDetedtedTime, getBedtime());
-        int length = diff[0]*60 +diff[1];
-        if( length>450 && length <510){
-            return 1 * rate;
-        }
-        if( (length > 420 && length< 450) ||(length >510 && length < 540 )){
-            return (int) (0.75 * rate);
-        }
-        else{
-            return (int) (rate* 0.3);
-        }
+//        int[] diff = getTimeDiff(sensorDetedtedTime, getBedtime());
+//        int length = diff[0]*60 +diff[1];
+//        if( length>450 && length <510){
+//            return 1 * rate;
+//        }
+//        if( (length > 420 && length< 450) ||(length >510 && length < 540 )){
+//            return (int) (0.75 * rate);
+//        }
+//        else{
+//            return (int) (rate* 0.3);
+//        }
     }
 
     //    public void insertShop(Shop shop){
@@ -444,5 +451,9 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
 
 
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
     }
 }
