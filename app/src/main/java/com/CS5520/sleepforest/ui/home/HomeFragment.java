@@ -437,9 +437,10 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         if( (length > 420 && length< 450) ||(length >510 && length < 540 )){
             return (int) (0.75 * rate);
         }
-        else{
+        if((length>0 && length <= 420) ||(length >= 540)){
             return (int) (rate* 0.3);
         }
+        return 0;
     }
 
     //    public void insertShop(Shop shop){
