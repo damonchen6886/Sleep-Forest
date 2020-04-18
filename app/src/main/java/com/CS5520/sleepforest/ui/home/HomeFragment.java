@@ -133,7 +133,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                 if (growing && sensorDetedtedTime != null){
                     coinsListener.sendCoins(calculateCoins());
                     displaycoin.setText(
-                            Integer.parseInt(displaycoin.getText().toString()) + calculateCoins()+ "");
+                           "+" + calculateCoins());
 
                     //              homeViewModel.updateCoin(calculateCoins());
                     ((MainActivity)getActivity()).reset();
@@ -183,7 +183,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 //
 //            }
 //        });
-        displaycoin.setText(coins + "");
+      //  displaycoin.setText(coins + "");
 //        testDatabase.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
