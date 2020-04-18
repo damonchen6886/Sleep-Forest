@@ -229,6 +229,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                 textView.setText("tap the tree to get coins");
                 switch(treeId){
                     case 0:
+                        mainImage.setImageResource(R.drawable.main_shop0);
                         setGrowingFinish(true);
                         setGrowing(false);
                         break;
