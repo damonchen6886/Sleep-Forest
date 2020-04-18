@@ -220,7 +220,6 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                 break;
 
             case 2:
-                homeViewModel.deleteCoin();
                 homeViewModel.updateCoin(-800);
                 break;
 

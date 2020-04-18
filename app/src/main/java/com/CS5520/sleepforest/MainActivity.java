@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements OnRegisterSuccess
    // private ScreenReceiver screenReceiver;
     private boolean communicationRegistered = false;
     private Calendar time;
-    private int treeId=1;
+    private int treeId=0;
     private AppBarConfiguration mAppBarConfiguration;
     private int currentCoins;
     @Override
