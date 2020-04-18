@@ -74,7 +74,7 @@ public class ShopFragment extends Fragment {
                 }
                 shopListner.sendToHome(1);
                 shopTree1.setClickable(false);
-                Toast.makeText(getContext(),"congratulation! the tree1 successfully Purchased",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Congratulation! An apple tree successfully purchased",Toast.LENGTH_SHORT).show();
                 coins.setText(Integer.parseInt(coins.getText().toString()) - 600 + "");
                 shopViewModel.updateCoin(-600);
             }
@@ -88,7 +88,7 @@ public class ShopFragment extends Fragment {
                 }
                 shopListner.sendToHome(2);
                 shopTree2.setClickable(false);
-                Toast.makeText(getContext(),"congratulations! the tree2 successfully Purchased",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Congratulations! A baobab tree successfully purchased",Toast.LENGTH_SHORT).show();
                 coins.setText(Integer.parseInt(coins.getText().toString()) - 800 + "");
                 shopViewModel.updateCoin(-800);
             }
@@ -102,7 +102,7 @@ public class ShopFragment extends Fragment {
                 }
                 shopListner.sendToHome(3);
                 shopTree3.setClickable(false);
-                Toast.makeText(getContext(),"congratulation! the tree3 successfully Purchased",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Congratulation! A cactus successfully purchased",Toast.LENGTH_SHORT).show();
                 coins.setText(Integer.parseInt(coins.getText().toString()) - 1200 + "");
                 shopViewModel.updateCoin(-1200);
             }
@@ -117,7 +117,7 @@ public class ShopFragment extends Fragment {
 
                 shopListner.sendToHome(4);
                 shopTree4.setClickable(false);
-                Toast.makeText(getContext(),"congratulation! the tree4 successfully Purchased",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Congratulation! A sunflower successfully purchased",Toast.LENGTH_SHORT).show();
                 coins.setText(Integer.parseInt(coins.getText().toString()) - 2000 + "");
                 shopViewModel.updateCoin(-2000);
             }
@@ -132,7 +132,7 @@ public class ShopFragment extends Fragment {
                 }
                 popUpContack();
             //  shopListner.sendToHome(5);
-              Toast.makeText(getContext(),"congratulation! the tree5 successfully Purchased",Toast.LENGTH_SHORT).show();
+              Toast.makeText(getContext(),"Congratulation! A REAL Haloxylon ammodendron successfully purchased",Toast.LENGTH_SHORT).show();
                // coins.setText(Integer.parseInt(coins.getText().toString()) - 10000 + "");
                 shopViewModel.updateCoin(-10000);
             }
