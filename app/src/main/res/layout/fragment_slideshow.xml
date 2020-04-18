@@ -12,9 +12,9 @@
         android:id="@+id/musicList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
         android:divider="@color/grayLine"
-        android:dividerHeight="1dp">
-    </ListView>
+        android:dividerHeight="1dp"></ListView>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
