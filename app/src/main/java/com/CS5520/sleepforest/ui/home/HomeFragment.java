@@ -120,24 +120,26 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         mainImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                homeViewModel.updateCoin(calculateCoins());
+                reset();
 
 
 
-                    homeViewModel.getCoins().observe(getViewLifecycleOwner(), new Observer<List<Shop>>() {
-                                @Override
-                                public void onChanged(List<Shop> shops) {
-                                    int earnedcoin = calculateCoins();
-                                    int tempCoin = 0;
-                                    if (shops.size() > 0) {
-                                        tempCoin = shops.get(0).getTotalCoins();
-                                        homeViewModel.deleteCoin();
-                                        homeViewModel.insertCoin(new Shop(1, tempCoin + earnedcoin));
-                                        currentCoin.setText(tempCoin + earnedcoin + "");
-                                        coinsListener.sendCoins(shops.get(0).getTotalCoins());
-                                    }
-
-                                }
-                            });
+//                    homeViewModel.getCoins().observe(getViewLifecycleOwner(), new Observer<List<Shop>>() {
+//                                @Override
+//                                public void onChanged(List<Shop> shops) {
+//                                    int earnedcoin = calculateCoins();
+//                                    int tempCoin = 0;
+//                                    if (shops.size() > 0) {
+//                                        tempCoin = shops.get(0).getTotalCoins();
+//                                        homeViewModel.deleteCoin();
+//                                        homeViewModel.insertCoin(new Shop(1, tempCoin + earnedcoin));
+//                                        currentCoin.setText(tempCoin + earnedcoin + "");
+//                                        coinsListener.sendCoins(shops.get(0).getTotalCoins());
+//                                    }
+//
+//                                }
+//                            });
 
                             // TODO: get coins.
 
