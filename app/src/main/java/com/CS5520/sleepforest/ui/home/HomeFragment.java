@@ -360,6 +360,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
     private void reset(){
         bedtime = null;
+        bedtimeNotice.setText(R.string.haven_t_set_bedtime_yet);
         sensorDetedtedTime = null;
         setGrowing(false);
         growingFinish = false;
