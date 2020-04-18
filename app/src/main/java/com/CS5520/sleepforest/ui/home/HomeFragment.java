@@ -72,6 +72,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     private Date sensorDetedtedTime;
     private boolean fail=false;
     private boolean growing = false;
+    private boolean growingFinish = false;
     private ImageView mainImage;
     private SensorManager sensorManager;
     private int treeId ;
@@ -130,7 +131,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
                     // TODO: get coins.
                     // TODO: reset state
-                if (growing && sensorDetedtedTime != null){
+                if (growingFinish && sensorDetedtedTime != null){
                     coinsListener.sendCoins(calculateCoins());
                     displaycoin.setText(
                            "+" + calculateCoins());
@@ -141,6 +142,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
    //                 homeViewModel.updateCoin(calculateCoins());
                     reset();
                 }
+
 
 
 
@@ -332,22 +334,27 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                     textView.setText("tap the tree to get coins");
                     switch(treeId){
                         case 0:
+                            setGrowingFinish(true);
                             setGrowing(false);
                             break;
                         case 1:
                             mainImage.setImageResource(R.drawable.main_shop1);
+                            setGrowingFinish(true);
                             setGrowing(false);
                             break;
                         case 2:
                             mainImage.setImageResource(R.drawable.main_shop2);
+                            setGrowingFinish(true);
                             setGrowing(false);
                             break;
                         case 3:
                             mainImage.setImageResource(R.drawable.main_shop3);
+                            setGrowingFinish(true);
                             setGrowing(false);
                             break;
                         case 4:
                             mainImage.setImageResource(R.drawable.main_shop4);
+                            setGrowingFinish(true);
                             setGrowing(false);
                             break;
                         default:
@@ -377,6 +384,11 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     public void setGrowing(boolean growing) {
         this.growing = growing;
     }
+
+    public void setGrowingFinish(boolean growing) {
+        this.growingFinish = growing;
+    }
+
 
     public Date getBedtime() {
         return bedtime;
@@ -454,6 +466,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         bedtime = null;
         sensorDetedtedTime = null;
         setGrowing(false);
+//        setGrowingFinish(false);
         setTreeId(0);
 
         mainImage.setImageResource(R.drawable.main_page2);
