@@ -44,7 +44,6 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     private int imageSrc;
     private int coins;
     private TextView textView;
-    private TextView currentCoin ;
     private HomeViewModel homeViewModel;
     private BroadcastReceiver screenOffReceiver = new BroadcastReceiver() {
         @Override
@@ -126,15 +125,17 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         mainImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                coinsListener.sendCoins(calculateCoins());
-                displaycoin.setText(
-                        Integer.parseInt(displaycoin.getText().toString()) + calculateCoins()+ "");
 
-  //              homeViewModel.updateCoin(calculateCoins());
-                reset();
+
                     // TODO: get coins.
                     // TODO: reset state
                 if (growing && sensorDetedtedTime != null){
+                    coinsListener.sendCoins(calculateCoins());
+                    displaycoin.setText(
+                            Integer.parseInt(displaycoin.getText().toString()) + calculateCoins()+ "");
+
+                    //              homeViewModel.updateCoin(calculateCoins());
+                    reset();
    //                 homeViewModel.updateCoin(calculateCoins());
                     reset();
                 }
@@ -414,19 +415,36 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     }
 
     public int calculateCoins(){
-        return 8000;
+       // return 8000;
+        switch (treeId){
+            case 1:
+               rate = 600;
+                break;
 
-//        int[] diff = getTimeDiff(sensorDetedtedTime, getBedtime());
-//        int length = diff[0]*60 +diff[1];
-//        if( length>450 && length <510){
-//            return 1 * rate;
-//        }
-//        if( (length > 420 && length< 450) ||(length >510 && length < 540 )){
-//            return (int) (0.75 * rate);
-//        }
-//        else{
-//            return (int) (rate* 0.3);
-//        }
+            case 2:
+                rate =1100;
+                break;
+
+            case 3:
+                rate =1600;
+                break;
+            case 4:
+                rate =2200;
+                break;
+
+        }
+
+        int[] diff = getTimeDiff(sensorDetedtedTime, getBedtime());
+        int length = diff[0]*60 +diff[1];
+        if( length>450 && length <510){
+            return 1 * rate;
+        }
+        if( (length > 420 && length< 450) ||(length >510 && length < 540 )){
+            return (int) (0.75 * rate);
+        }
+        else{
+            return (int) (rate* 0.3);
+        }
     }
 
     //    public void insertShop(Shop shop){
