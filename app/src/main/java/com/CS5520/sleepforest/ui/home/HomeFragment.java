@@ -24,6 +24,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.CS5520.sleepforest.CoinsListener;
+import com.CS5520.sleepforest.MainActivity;
 import com.CS5520.sleepforest.R;
 import com.CS5520.sleepforest.Shop;
 
@@ -135,7 +136,8 @@ public class HomeFragment extends Fragment implements SensorEventListener{
                             Integer.parseInt(displaycoin.getText().toString()) + calculateCoins()+ "");
 
                     //              homeViewModel.updateCoin(calculateCoins());
-                    reset();
+                    ((MainActivity)getActivity()).reset();
+
    //                 homeViewModel.updateCoin(calculateCoins());
                     reset();
                 }

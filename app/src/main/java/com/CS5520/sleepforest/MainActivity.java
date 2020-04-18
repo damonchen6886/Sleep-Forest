@@ -228,6 +228,15 @@ public class MainActivity extends AppCompatActivity implements OnRegisterSuccess
     public void sendCoins(int coins) {
         this.reward = coins;
     }
+
+
+    public void reset(){
+        communicationRegistered = false;
+      time = null;
+        treeId = 0;
+        coins = 0;
+
+    }
 }
 
 
