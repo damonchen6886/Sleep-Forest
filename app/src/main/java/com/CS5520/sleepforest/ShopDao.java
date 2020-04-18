@@ -18,6 +18,9 @@ interface ShopDao {
     @Query("SELECT * FROM shop where shopId = :id")
     List<Shop> findShop(int id);
 
+    @Query("UPDATE SHOP SET totalCoins  = (select totalCoins from  shop where shopId = 1) + :numbers WHERE shopId = 1")
+    void updateCoins(int numbers);
+
 
     @Query("DELETE FROM shop")
     void deleteShop();

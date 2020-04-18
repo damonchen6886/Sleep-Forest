@@ -56,6 +56,10 @@ public class HomeViewModel extends AndroidViewModel {
         shopRepository.findShop(id);
     }
 
+    public void updateCoin(int c){
+        shopRepository.updateShop(c);
+    }
+
 
 
 
