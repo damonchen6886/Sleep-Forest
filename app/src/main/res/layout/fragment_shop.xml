@@ -17,10 +17,12 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="257dp"
+                android:layout_height="24dp"
                 android:gravity="center">
+
                 <TextView
                     android:id="@+id/text_gallery"
                     android:layout_width="0dp"
@@ -31,6 +33,20 @@
                     android:text="aaaaaa"
                     android:textSize="18sp"
                     android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/imageView9"
+                    android:layout_width="102dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitEnd"
+                    app:srcCompat="@drawable/sleep_coin" />
+
+                <TextView
+                    android:id="@+id/currentCoin"
+                    android:layout_width="163dp"
+                    android:layout_height="wrap_content"
+                    android:text="CurrentCoin"
+                    android:textSize="18sp" />
 
 
             </TableRow>

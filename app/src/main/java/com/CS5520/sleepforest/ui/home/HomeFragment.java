@@ -1,5 +1,6 @@
 package com.CS5520.sleepforest.ui.home;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
@@ -21,21 +23,26 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.CS5520.sleepforest.MovementListener;
+import com.CS5520.sleepforest.CoinsListener;
 import com.CS5520.sleepforest.R;
-import com.CS5520.sleepforest.ScreenReceiver;
-import com.CS5520.sleepforest.Time;
+import com.CS5520.sleepforest.Shop;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 
 public class HomeFragment extends Fragment implements SensorEventListener{
-   // final int SLEEPHOUR = 9;
+    /////////
+    /////////
+    // final int SLEEPHOUR = 9;
+    private int rate = 100;
+    private CoinsListener coinsListener;
     private int imageSrc;
+    private int coins;
     private TextView textView;
     private HomeViewModel homeViewModel;
     private BroadcastReceiver screenOffReceiver = new BroadcastReceiver() {
@@ -56,7 +63,6 @@ public class HomeFragment extends Fragment implements SensorEventListener{
             if ((diffh == 0 && diffm <=10) || (diffh <= 0 && diffm <=0)){
                 return;
             }
-            
             setGrowing(false);
             mainImage.setImageResource(R.drawable.main_fail);
         }
@@ -67,7 +73,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     private boolean growing = false;
     private ImageView mainImage;
     private SensorManager sensorManager;
-    private int treeId;
+    private int treeId ;
     private Sensor accelerometer;
 
     private float[] mGravity;
@@ -75,44 +81,71 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     private float mAccelCurrent;
     private float mAccelLast;
     // private MovementListener sensorEventListener;
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_home, container, false);
 
+    }
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         if (getArguments() != null) {
             imageSrc = getArguments().getInt("image");
         }
         else {
             imageSrc = R.drawable.main_page2;
         }
-    }
+  //      currentCoin = getView().findViewById(R.id.currentCoin);
+//        currentCoin.setText("0");
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+
+
+//    public View onCreateView(@NonNull LayoutInflater inflater,
+//                             ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        textView = root.findViewById(R.id.text_home);
+        // View root = inflater.inflate(R.layout.fragment_home, container, false);
+        textView = getView().findViewById(R.id.text_home);
         if (imageSrc != R.drawable.main_page2){
             textView.setText("Tree is growing while phone is locked");
         }else{
             textView.setText("Please go to setting to \nset your time to go to bed");
         }
-        mainImage = root.findViewById(R.id.imageViewMain);
+        mainImage = getView().findViewById(R.id.imageViewMain);
+        final TextView displaycoin = getView().findViewById(R.id.getCoins);
 
+//        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//
+//            }
+//        });
 
         mainImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (growing && sensorDetedtedTime != null){
+
                     // TODO: get coins.
                     // TODO: reset state
+                if (growing && sensorDetedtedTime != null){
+                    coinsListener.sendCoins(calculateCoins());
+                    displaycoin.setText(
+                            Integer.parseInt(displaycoin.getText().toString()) + calculateCoins()+ "");
+
+                    //              homeViewModel.updateCoin(calculateCoins());
+                    reset();
+   //                 homeViewModel.updateCoin(calculateCoins());
+                    reset();
                 }
+
+
+
             }
         });
 
-       // screenReceiver = new ScreenReceiver();
+        // screenReceiver = new ScreenReceiver();
         IntentFilter screenStatusIF = new IntentFilter();
         //screenStatusIF.addAction(Intent.ACTION_SCREEN_ON);
         screenStatusIF.addAction(Intent.ACTION_SCREEN_OFF);
@@ -136,12 +169,126 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         mainImage.setImageResource(imageSrc);
         Log.e("tree", this.treeId + "");
 
-        return root;
+        ///////////////////////////
+//        Button testDatabase = getView().findViewById(R.id.testCoin);
+
+//        homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
+//            @Override
+//            public void onChanged(@Nullable List<Shop> s) {
+//                if (s.size() >0){
+//                    displaycoin.setText(s.get(0).getTotalCoins()+"");
+//                    coinsListener.sendCoins(s.get(0).getTotalCoins());}
+//
+//            }
+//        });
+        displaycoin.setText(coins + "");
+//        testDatabase.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // int coin = 30;
+//                homeViewModel.deleteCoin();
+//                homeViewModel.insertCoin(new Shop(1, 3000));
+
+
+//                homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
+//                    @Override
+//                    public void onChanged(@Nullable List<Shop> s) {
+//                        if (s.size() >0){
+//                            displaycoin.setText(s.get(0).getTotalCoins()+"");
+//                            coinsListener.sendCoins(s.get(0).getTotalCoins());}
+//
+//                    }
+////                });
+//            }
+//        });
+
+
+       // currentCoin = getView().findViewById(R.id.currentCoin);
+       // final int current = currentCoin.getText().toString().equals("")?0:Integer.parseInt(currentCoin.getText().toString());
+//        switch (treeId){
+//            case 1:
+//               homeViewModel.updateCoin(-600);
+//               rate = 600;
+//                break;
+//
+//            case 2:
+//                homeViewModel.updateCoin(-800);
+//                rate =1100;
+//                break;
+//
+//            case 3:
+//                homeViewModel.updateCoin(-1200);
+//                rate =1600;
+//                break;
+//            case 4:
+//                homeViewModel.updateCoin(-2000);
+//                rate =2200;
+//                break;
+//            case 5:
+//                homeViewModel.updateCoin(-10000);
+//
+//                break;
+//        }
+//        homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
+//            @Override
+//            public void onChanged(@Nullable List<Shop> s) {
+//                if (s.size() >0){
+//
+//
+//                    currentCoin.setText(s.get(0).getTotalCoins() + "");
+
+
+
+//                    if(treeId ==2){
+//                        int databaseCurrentCoin = s.get(0).getTotalCoins() -800;
+//                        homeViewModel.deleteCoin();
+//                        homeViewModel.insertCoin(new Shop(1, databaseCurrentCoin));
+//                        currentCoin.setText(databaseCurrentCoin +"");
+//                        coinsListener.sendCoins(s.get(0).getTotalCoins());
+//                    }
+//                    if(treeId ==3){
+//                        int databaseCurrentCoin = s.get(0).getTotalCoins() -1200;
+//                        homeViewModel.deleteCoin();
+//                        homeViewModel.insertCoin(new Shop(1, databaseCurrentCoin));
+//                        currentCoin.setText(databaseCurrentCoin +"");
+//                        coinsListener.sendCoins(s.get(0).getTotalCoins());
+//                    }
+//                    if(treeId ==4){
+//                        int databaseCurrentCoin = s.get(0).getTotalCoins() -2000;
+//                        homeViewModel.deleteCoin();
+//                        homeViewModel.insertCoin(new Shop(1, databaseCurrentCoin));
+//                        currentCoin.setText(databaseCurrentCoin +"");
+//                        coinsListener.sendCoins(s.get(0).getTotalCoins());
+//                    }
+//                    if(treeId ==5){
+//                        int databaseCurrentCoin = s.get(0).getTotalCoins() -10000;
+//                        homeViewModel.deleteCoin();
+//                        homeViewModel.insertCoin(new Shop(1, databaseCurrentCoin));
+//                        currentCoin.setText(databaseCurrentCoin +"");
+//                        coinsListener.sendCoins(s.get(0).getTotalCoins());
+//                    }
+
+//                }
+//            }
+//
+
+
+
+ //       });
+
+//        homeViewModel.getText().observe(this, new Observer<String>() {
+//            @Override
+//            public void onChanged(String s) {
+//                displaycoin.setText();
+//            }
+//        });
+        //  return root;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        if (growing)
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
         Log.e(TAG, "nResume");
     }
@@ -156,7 +303,9 @@ public class HomeFragment extends Fragment implements SensorEventListener{
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
+
             Log.e(TAG, "onSensorChanged");
+
             mGravity = event.values.clone();
             // Shake detection
             float x = mGravity[0];
@@ -236,7 +385,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
     public void setImageSrc(int imageSrc) {
         this.imageSrc = imageSrc;
-       // Log.e("image",this.imageSrc + "");
+        // Log.e("image",this.imageSrc + "");
     }
 
     private int[] getTimeDiff(Date current, Date bedtime){
@@ -253,5 +402,66 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
     public void setTreeId(int treeId) {
         this.treeId = treeId;
+    }
+
+    public int calculateCoins(){
+       // return 8000;
+        switch (treeId){
+            case 1:
+               rate = 600;
+                break;
+
+            case 2:
+                rate =1100;
+                break;
+
+            case 3:
+                rate =1600;
+                break;
+            case 4:
+                rate =2200;
+                break;
+
+        }
+
+        int[] diff = getTimeDiff(sensorDetedtedTime, getBedtime());
+        int length = diff[0]*60 +diff[1];
+        if( length>450 && length <510){
+            return 1 * rate;
+        }
+        if( (length > 420 && length< 450) ||(length >510 && length < 540 )){
+            return (int) (0.75 * rate);
+        }
+        else{
+            return (int) (rate* 0.3);
+        }
+    }
+
+    //    public void insertShop(Shop shop){
+//        shopRepository = new ShopRepository(get);
+//        shopRepository.insertShop(shop);
+//    }
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        coinsListener = (CoinsListener)activity;
+    }
+
+    private void reset(){
+        bedtime = null;
+        sensorDetedtedTime = null;
+        setGrowing(false);
+        setTreeId(0);
+
+        mainImage.setImageResource(R.drawable.main_page2);
+        textView.setText("Please go to setting to \nset your time to go to bed");
+
+
+
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
     }
 }

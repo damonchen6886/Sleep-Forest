@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Time.class}, version = 1)
+@Database(entities = {Time.class}, version = 1, exportSchema = false)
 public abstract class TimeRoomDatabase extends RoomDatabase {
 
     public abstract TimeDao timeDao();
