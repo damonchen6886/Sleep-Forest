@@ -179,120 +179,7 @@ public class HomeFragment extends Fragment implements SensorEventListener{
         mainImage.setImageResource(imageSrc);
         Log.e("tree", this.treeId + "");
 
-        ///////////////////////////
-//        Button testDatabase = getView().findViewById(R.id.testCoin);
 
-//        homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
-//            @Override
-//            public void onChanged(@Nullable List<Shop> s) {
-//                if (s.size() >0){
-//                    displaycoin.setText(s.get(0).getTotalCoins()+"");
-//                    coinsListener.sendCoins(s.get(0).getTotalCoins());}
-//
-//            }
-//        });
-      //  displaycoin.setText(coins + "");
-//        testDatabase.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // int coin = 30;
-//                homeViewModel.deleteCoin();
-//                homeViewModel.insertCoin(new Shop(1, 3000));
-
-
-//                homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
-//                    @Override
-//                    public void onChanged(@Nullable List<Shop> s) {
-//                        if (s.size() >0){
-//                            displaycoin.setText(s.get(0).getTotalCoins()+"");
-//                            coinsListener.sendCoins(s.get(0).getTotalCoins());}
-//
-//                    }
-////                });
-//            }
-//        });
-
-
-       // currentCoin = getView().findViewById(R.id.currentCoin);
-       // final int current = currentCoin.getText().toString().equals("")?0:Integer.parseInt(currentCoin.getText().toString());
-//        switch (treeId){
-//            case 1:
-//               homeViewModel.updateCoin(-600);
-//               rate = 600;
-//                break;
-//
-//            case 2:
-//                homeViewModel.updateCoin(-800);
-//                rate =1100;
-//                break;
-//
-//            case 3:
-//                homeViewModel.updateCoin(-1200);
-//                rate =1600;
-//                break;
-//            case 4:
-//                homeViewModel.updateCoin(-2000);
-//                rate =2200;
-//                break;
-//            case 5:
-//                homeViewModel.updateCoin(-10000);
-//
-//                break;
-//        }
-//        homeViewModel.getCoins().observe(getViewLifecycleOwner(),new Observer<List<Shop>>() {
-//            @Override
-//            public void onChanged(@Nullable List<Shop> s) {
-//                if (s.size() >0){
-//
-//
-//                    currentCoin.setText(s.get(0).getTotalCoins() + "");
-
-
-
-//                    if(treeId ==2){
-//                        int databaseCurrentCoin = s.get(0).getTotalCoins() -800;
-//                        homeViewModel.deleteCoin();
-//                        homeViewModel.insertCoin(new Shop(1, databaseCurrentCoin));
-//                        currentCoin.setText(databaseCurrentCoin +"");
-//                        coinsListener.sendCoins(s.get(0).getTotalCoins());
-//                    }
-//                    if(treeId ==3){
-//                        int databaseCurrentCoin = s.get(0).getTotalCoins() -1200;
-//                        homeViewModel.deleteCoin();
-//                        homeViewModel.insertCoin(new Shop(1, databaseCurrentCoin));
-//                        currentCoin.setText(databaseCurrentCoin +"");
-//                        coinsListener.sendCoins(s.get(0).getTotalCoins());
-//                    }
-//                    if(treeId ==4){
-//                        int databaseCurrentCoin = s.get(0).getTotalCoins() -2000;
-//                        homeViewModel.deleteCoin();
-//                        homeViewModel.insertCoin(new Shop(1, databaseCurrentCoin));
-//                        currentCoin.setText(databaseCurrentCoin +"");
-//                        coinsListener.sendCoins(s.get(0).getTotalCoins());
-//                    }
-//                    if(treeId ==5){
-//                        int databaseCurrentCoin = s.get(0).getTotalCoins() -10000;
-//                        homeViewModel.deleteCoin();
-//                        homeViewModel.insertCoin(new Shop(1, databaseCurrentCoin));
-//                        currentCoin.setText(databaseCurrentCoin +"");
-//                        coinsListener.sendCoins(s.get(0).getTotalCoins());
-//                    }
-
-//                }
-//            }
-//
-
-
-
- //       });
-
-//        homeViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(String s) {
-//                displaycoin.setText();
-//            }
-//        });
-        //  return root;
     }
 
     @Override
@@ -446,29 +333,25 @@ public class HomeFragment extends Fragment implements SensorEventListener{
 
         int[] diff = getTimeDiff(sensorDetedtedTime, getBedtime());
         int length = diff[0]*60 +diff[1];
-        System.out.println(length);
-        System.out.println(diff[0]);
-        System.out.println(diff[1]);
-        if( length>450 && length <510){
+
+        if (length < 450 && length >0){
+            return rate * length / 450;
+        }
+
+        if( length>=450 && length <=510){
             return 1 * rate;
         }
 
-        if( (length > 420 && length< 450) ||(length >510 && length < 540 )){
-            return (int) (0.75 * rate);
+        if (length>510){
+            int result = rate - rate * (length-510)/240;
+            if (result< 0){
+                return 0;
+            }
+            return result;
         }
-
-        if((length>0 && length <= 420) ||(length >= 540)){
-            return (int) (rate* 0.3);
-        }
-
         return 0;
 
     }
-
-    //    public void insertShop(Shop shop){
-//        shopRepository = new ShopRepository(get);
-//        shopRepository.insertShop(shop);
-//    }
     @SuppressWarnings("deprecation")
     @Override
     public void onAttach(Activity activity) {
