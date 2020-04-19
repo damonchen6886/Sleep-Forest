@@ -20,7 +20,7 @@ When a bedtime notification pops up, users need to lock the screen and go to bed
 #### Offer white noise (Achieved) 
 - Providing user tools for good sleeping habits.
 For users who have poor sleep quality, white noise is a good solution. This app provides several kinds of white noises for users to choose from and help the users to smoothly fall into sleep.
-#### Statistic for sleep quality (Achieved
+#### Statistic for sleep quality (Achieved）
 - Analysis of sleep quality, motivates the users to keep up the good sleep habit. 
 The way we choose to analyze the quality of sleep is sleep hours. The National Sleep Foundation suggests that people should have 8-hour sleep on average. In order to accurately receive the sleep data, an accelerometer sensor is used to detect when the user is awake. The app converts the sleep hours to the in-game rewards that can be used to motivate users to keep up the good sleep habits. All the statistic and computation are automatically processed in the backend, the end-users will receive the corresponding rewards that reflect their sleep quality and habits. 
 #### Rewards system (Achieved) 
