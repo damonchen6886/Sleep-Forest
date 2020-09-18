@@ -1,4 +1,6 @@
-# Sleep Forest - Heal the world with help sleep
+# Sleep Forest
+
+Heal the world with help sleep
 
 ## Description:
 The key to good quality of night sleep is to maintain a regular sleeping habit, such as never stay up late.
