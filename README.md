@@ -1,6 +1,4 @@
-# Sleep Forest
-
-Heal the world with help sleep
+# Sleep Forest - Heal the world with help sleep
 
 ## Description:
 The key to good quality of night sleep is to maintain a regular sleeping habit, such as never stay up late.
@@ -26,3 +24,4 @@ The way we choose to analyze the quality of sleep is sleep hours. The National S
 #### Rewards system (Achieved) 
 - Improve user engagements, earn credits,  plant real trees on earth,
 Users can buy a seedling to plant. Different seedlings have different costs as well as earnings rates. The basic free one will be a default choice. Based on sleep quality and the level of the tree, rewards will be given as the number of coins to the users. The suggested sleep time should be 7.5-8.5 hours, for which the user can get 100% of the reward; less than 7.5 will get  (length/7.5 hours)%; 8.5 -12.5 hours will get 100% - (additional time/4.5 hours)%. and nothing for time over 12.5 hours. When the user has enough coins, users are able to upgrade the tree and eventually a real tree is available to plant by contacting us.
+
