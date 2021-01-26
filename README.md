@@ -29,7 +29,8 @@ Users can buy a seedling to plant. Different seedlings have different costs as w
 
 ## Sample UI
 <img src="https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/1.png" width="300" height="600">
-![alt text](https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/2.png?raw=true)
-![alt text](https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/3.png?raw=true)
-![alt text](https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/4.png?raw=true)
-![alt text](https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/5.png?raw=true)
+<img src="https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/2.png" width="300" height="600">
+<img src="https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/3.png" width="300" height="600">
+<img src="https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/4.png" width="300" height="600">
+<img src="https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/5.png" width="300" height="600">
+
