@@ -6,6 +6,8 @@ Heal the world with help sleep
 The key to good quality of night sleep is to maintain a regular sleeping habit, such as never stay up late.
 This app is aimed to cultivate such a good sleeping habit. There are different trees for users to grow even a real one and develop as a reward.
 
+## Sample UI
+![alt text](https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/1.png?raw=true)
 
 ## Key Features:
 
