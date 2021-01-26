@@ -28,8 +28,7 @@ The way we choose to analyze the quality of sleep is sleep hours. The National S
 Users can buy a seedling to plant. Different seedlings have different costs as well as earnings rates. The basic free one will be a default choice. Based on sleep quality and the level of the tree, rewards will be given as the number of coins to the users. The suggested sleep time should be 7.5-8.5 hours, for which the user can get 100% of the reward; less than 7.5 will get  (length/7.5 hours)%; 8.5 -12.5 hours will get 100% - (additional time/4.5 hours)%. and nothing for time over 12.5 hours. When the user has enough coins, users are able to upgrade the tree and eventually a real tree is available to plant by contacting us.
 
 ## Sample UI
-<img src="https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/1.png" width="50" height="300">
-<img src="https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/1.png" alt="drawing" style="width:200px; height:600px"/>
+<img src="https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/1.png" width="200" height="600">
 ![alt text](https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/2.png?raw=true)
 ![alt text](https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/3.png?raw=true)
 ![alt text](https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/4.png?raw=true)
