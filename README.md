@@ -1,6 +1,12 @@
 # Sleep Forest
 
-Heal the world with help sleep
+Heal the world with help sleep, this Android app is aimed to cultivate a good sleeping habit.
+
+
+## Sample UI
+![alt text](https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/6.png?raw=true)
+
+
 
 ## Description:
 The key to good quality of night sleep is to maintain a regular sleeping habit, such as never stay up late.
@@ -26,11 +32,4 @@ The way we choose to analyze the quality of sleep is sleep hours. The National S
 #### Rewards system (Achieved) 
 - Improve user engagements, earn credits,  plant real trees on earth,
 Users can buy a seedling to plant. Different seedlings have different costs as well as earnings rates. The basic free one will be a default choice. Based on sleep quality and the level of the tree, rewards will be given as the number of coins to the users. The suggested sleep time should be 7.5-8.5 hours, for which the user can get 100% of the reward; less than 7.5 will get  (length/7.5 hours)%; 8.5 -12.5 hours will get 100% - (additional time/4.5 hours)%. and nothing for time over 12.5 hours. When the user has enough coins, users are able to upgrade the tree and eventually a real tree is available to plant by contacting us.
-
-## Sample UI
-<img src="https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/1.png" width="300" height="600">
-<img src="https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/2.png" width="300" height="600">
-<img src="https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/3.png" width="300" height="600">
-<img src="https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/4.png" width="300" height="600">
-<img src="https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/5.png" width="300" height="600">
 
