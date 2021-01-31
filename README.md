@@ -4,7 +4,7 @@ Heal the world with help sleep, this Android app is aimed to cultivate a good sl
 
 
 ## Sample UI
-![alt text](https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/6.png?raw=true)
+![alt text](https://github.com/damonchen6886/Sleep-Forest/blob/master/demo_image/6.jpg?raw=true)
 
 
 
